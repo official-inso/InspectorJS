@@ -1,0 +1,662 @@
+/* icons (start) */
+.icons-logo {
+  background-image: url('../media/logo/logo_paperWork.svg');
+}
+
+.icons-notification:before {
+  content: "\E836";
+  font-family: ico;
+}
+
+.icons-notification_bold:before {
+  content: "\E951";
+  font-family: ico;
+}
+
+.icons-favorite:before {
+  content: "\E879";
+  font-family: ico;
+}
+
+.icons-layers:before {
+  content: "\E87E";
+  font-family: ico;
+}
+
+.icons-info:before {
+  content: "\E87F";
+  font-family: ico;
+}
+
+.icons-warning:before {
+  content: "\E81E";
+  font-family: ico;
+}
+
+.icons-warning2:before {
+  content: "\E81B";
+  font-family: ico;
+}
+
+.icons-warning2_bold:before {
+  content: "\E94E";
+  font-family: ico;
+}
+
+.icons-checked_all:before {
+  content: "\E944";
+  font-family: ico;
+}
+
+.icons-warning_bold:before {
+  content: "\E94D";
+  font-family: ico;
+}
+
+.icons-filter:before {
+  content: "\E875";
+  font-family: ico;
+}
+
+.icons-error:before {
+  content: "\E81C";
+  font-family: ico;
+}
+
+.icons-bottom:before {
+  content: "\E842";
+  font-family: ico;
+}
+
+.icons-right_two:before {
+  content: "\E847";
+  font-family: ico;
+}
+
+.icons-close:before {
+  content: "\E8F6";
+  font-family: ico;
+}
+
+.icons-cloud:before {
+  content: "\E8FC";
+  font-family: ico;
+}
+
+.icons-energy:before {
+  content: "\E8F8";
+  font-family: ico;
+}
+
+.icons-volume100:before {
+  content: "\E8F0";
+  font-family: ico;
+}
+
+.icons-scalePlus:before {
+  content: "\E8F9";
+  font-family: ico;
+}
+
+.icons-scaleMinus:before {
+  content: "\E8FA";
+  font-family: ico;
+}
+
+.icons-volume50:before {
+  content: "\E8EF";
+  font-family: ico;
+}
+
+.icons-volume0:before {
+  content: "\E8EE";
+  font-family: ico;
+}
+
+.icons-phone:before {
+  content: "\E8AA";
+  font-family: ico;
+}
+
+.icons-play:before {
+  content: "\E8AE";
+  font-family: ico;
+}
+
+.icons-logs:before {
+  content: "\E8A1";
+  font-family: ico;
+}
+
+.icons-photo:before {
+  content: "\E83D";
+  font-family: ico;
+}
+
+.icons-download:before {
+  content: "\E864";
+  font-family: ico;
+}
+
+.icons-global_link:before {
+  content: "\E869";
+  font-family: ico;
+}
+
+.icons-rewind:before {
+  content: "\E86F";
+  font-family: ico;
+}
+
+.icons-autologin:before {
+  content: "\E8B6";
+  font-family: ico;
+}
+
+.icons-save:before {
+  content: "\E8BC";
+  font-family: ico;
+}
+
+.icons-cut:before {
+  content: "\E8BF";
+  font-family: ico;
+}
+
+.icons-ftp:before {
+  content: "\E8B5";
+  font-family: ico;
+}
+
+.icons-update:before {
+  content: "\E8B7";
+  font-family: ico;
+}
+
+.icons-update2:before {
+  content: "\E8B9";
+  font-family: ico;
+}
+
+.icons-update3:before {
+  content: "\E8BB";
+  font-family: ico;
+}
+
+.icons-home:before {
+  content: "\E87A";
+  font-family: ico;
+}
+
+.icons-doc_empty:before {
+  content: "\E872";
+  font-family: ico;
+}
+
+.icons-image:before {
+  content: "\E87C";
+  font-family: ico;
+}
+
+.icons-video:before {
+  content: "\E871";
+  font-family: ico;
+}
+
+.icons-music:before {
+  content: "\E89D";
+  font-family: ico;
+}
+
+.icons-moon:before {
+  content: "\E898";
+  font-family: ico;
+}
+
+.icons-pointer:before {
+  content: "\E89F";
+  font-family: ico;
+}
+
+.icons-home_bold:before {
+  content: "\E950";
+  font-family: ico;
+}
+
+.icons-share:before {
+  content: "\E8C0";
+  font-family: ico;
+}
+
+.icons-star:before {
+  content: "\E8CD";
+  font-family: ico;
+}
+
+.icons-hash:before {
+  content: "\E8C8";
+  font-family: ico;
+}
+
+.icons-stop:before {
+  content: "\E8C9";
+  font-family: ico;
+}
+
+.icons-staff:before {
+  content: "\E8EA";
+  font-family: ico;
+}
+
+.icons-upload:before {
+  content: "\E8E1";
+  font-family: ico;
+}
+
+.icons-user_close:before {
+  content: "\E8E8";
+  font-family: ico;
+}
+
+.icons-update_program:before {
+  content: "\E8E3";
+  font-family: ico;
+}
+
+.icons-disk:before {
+  content: "\E87D";
+  font-family: ico;
+}
+
+.icons-two_bottom:before {
+  content: "\E846";
+  font-family: ico;
+}
+
+.icons-top:before {
+  content: "\E845";
+  font-family: ico;
+}
+
+.icons-right:before {
+  content: "\E844";
+  font-family: ico;
+}
+
+.icons-left:before {
+  content: "\E843";
+  font-family: ico;
+}
+
+.icons-two_right:before {
+  content: "\E847";
+  font-family: ico;
+}
+
+.icons-two_top:before {
+  content: "\E848";
+  font-family: ico;
+}
+
+.icons-two_left:before {
+  content: "\E849";
+  font-family: ico;
+}
+
+.icons-past:before {
+  content: "\E84B";
+  font-family: ico;
+}
+
+.icons-doc:before {
+  content: "\E870";
+  font-family: ico;
+}
+
+.icons-stat:before {
+  content: "\E831";
+  font-family: ico;
+}
+
+.icons-spu:before {
+  content: "\E85E";
+  font-family: ico;
+}
+
+.icons-enter:before {
+  content: "\E857";
+  font-family: ico;
+}
+
+.icons-compas:before {
+  content: "\E854";
+  font-family: ico;
+}
+
+.icons-card:before {
+  content: "\E85F";
+  font-family: ico;
+}
+
+.icons-copy:before {
+  content: "\E855";
+  font-family: ico;
+}
+
+.icons-user_ok:before {
+  content: "\E8E5";
+  font-family: ico;
+}
+
+.icons-settings:before {
+  content: "\E8C3";
+  font-family: ico;
+}
+
+.icons-box:before {
+  content: "\E83C";
+  font-family: ico;
+}
+
+.icons-book:before {
+  content: "\E837";
+  font-family: ico;
+}
+
+.icons-small_box:before {
+  content: "\E852";
+  font-family: ico;
+}
+
+.icons-pc:before {
+  content: "\E899";
+  font-family: ico;
+}
+
+.icons-ssh:before {
+  content: "\E954";
+  font-family: ico;
+}
+
+.icons-more:before {
+  content: "\E89B";
+  font-family: ico;
+}
+
+.icons-more2:before {
+  content: "\E89A";
+  font-family: ico;
+}
+
+.icons-news:before {
+  content: "\E86B";
+  font-family: ico;
+}
+
+.icons-dark:before {
+  content: "\E86B";
+  font-family: ico;
+}
+
+.icons-email:before {
+  content: "\E830";
+  font-family: ico;
+}
+
+.icons-search:before {
+  content: "\E8BD";
+  font-family: ico;
+}
+
+.icons-server:before {
+  content: "\E8BE";
+  font-family: ico;
+}
+
+.icons-insta:before {
+  content: "\E880";
+  font-family: ico;
+}
+
+.icons-logout:before {
+  content: "\E888";
+  font-family: ico;
+}
+
+.icons-help:before {
+  content: "\E883";
+  font-family: ico;
+}
+
+.icons-list:before {
+  content: "\E886";
+  font-family: ico;
+}
+
+.icons-panel:before {
+  content: "\E881";
+  font-family: ico;
+}
+
+.icons-search_bold:before {
+  content: "\E952";
+  font-family: ico;
+}
+
+.icons-plus:before {
+  content: "\E8B1";
+  font-family: ico;
+}
+
+.icons-qr:before {
+  content: "\E953";
+  font-family: ico;
+}
+
+.icons-download_folder:before {
+  content: "\E80A";
+  font-family: ico;
+}
+
+.icons-reviews:before {
+  content: "\E82E";
+  font-family: ico;
+}
+
+.icons-access:before {
+  content: "\E90A";
+  font-family: ico;
+}
+
+.icons-question:before {
+  content: "\E903";
+  font-family: ico;
+}
+
+.icons-full_size:before {
+  content: "\E908";
+  font-family: ico;
+}
+
+.icons-add_folder:before {
+  content: "\E90E";
+  font-family: ico;
+}
+
+.icons-upload_folder:before {
+  content: "\E917";
+  font-family: ico;
+}
+
+.icons-upload_file:before {
+  content: "\E918";
+  font-family: ico;
+}
+
+.icons-arrow_bottom:before {
+  content: "\E82A";
+  font-family: ico;
+}
+
+.icons-arrow_top_left:before {
+  content: "\E82B";
+  font-family: ico;
+}
+
+
+.icons-arrow_left:before {
+  content: "\E828";
+  font-family: ico;
+}
+
+.icons-arrow_right:before {
+  content: "\E829";
+  font-family: ico;
+}
+
+.icons-user:before {
+  content: "\E8E9";
+  font-family: ico;
+}
+
+.icons-male:before {
+  content: "\E943";
+  font-family: ico;
+}
+
+.icons-female:before {
+  content: "\E942";
+  font-family: ico;
+}
+
+.icons-user_add:before {
+  content: "\E8E7";
+  font-family: ico;
+}
+
+.icons-menu:before {
+  content: "\E878";
+  font-family: ico;
+}
+
+.icons-folder:before {
+  content: "\E874";
+  font-family: ico;
+}
+
+.icons-link:before {
+  content: "\E884";
+  font-family: ico;
+}
+
+.icons-min_size:before {
+  content: "\E88D";
+  font-family: ico;
+}
+
+.icons-editBlock:before {
+  content: "\E867";
+  font-family: ico;
+}
+
+.icons-rename:before {
+  content: "\E868";
+  font-family: ico;
+}
+
+.icons-security:before {
+  content: "\E941";
+  font-family: ico;
+}
+
+.icons-theme:before {
+  content: "\E940";
+  font-family: ico;
+}
+
+.icons-checked:before {
+  content: "\E83F";
+  font-family: ico;
+}
+
+.icons-calendar:before {
+  content: "\E83A";
+  font-family: ico;
+}
+
+.icons-eye:before {
+  content: "\E86A";
+  font-family: ico;
+}
+
+.icons-eye-none:before {
+  content: "\E86E";
+  font-family: ico;
+}
+
+.icons-load:before {
+  content: "\E93F";
+  font-family: ico;
+}
+
+.icons-staffs:before {
+  content: "\E931";
+  font-family: ico;
+}
+
+.icons-lock:before {
+  content: "\E887";
+  font-family: ico;
+}
+
+.icons-upsize:before {
+  content: "\E88B";
+  font-family: ico;
+}
+
+.icons-del:before {
+  content: "\E8DB";
+  font-family: ico;
+}
+
+.icons-tag:before {
+  content: "\E8D2";
+  font-family: ico;
+}
+
+.icons-pen:before {
+  content: "\E866";
+  font-family: ico;
+}
+
+.icons-print:before {
+  content: "\E955";
+  font-family: ico;
+}
+
+.icons-mail:before {
+  content: "\E88A";
+  font-family: ico;
+}
+
+.icons-time:before {
+  content: "\E84D";
+  font-family: ico;
+}
+
+.icons-circle:before {
+  content: "\E84A";
+  font-family: ico;
+}
+
+.icons-circle_fill:before {
+  content: "\E80B";
+  font-family: ico;
+}
+
+.icons-circle_two:before {
+  content: "\E80C";
+  font-family: ico;
+}
+
+/* icons (end) */

@@ -1,1 +1,1 @@
-# PropertyJS
+# InspectorJS

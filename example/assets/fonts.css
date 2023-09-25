@@ -1,0 +1,15 @@
+@font-face {
+  src: url("feather.woff");
+  font-family: 'ico';
+  font-display: swap;
+}
+@font-face {
+  font-family: 'gb';
+  src: url('Gilroy-ExtraBold.ttf');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'gl';
+  src: url('Gilroy-Light.ttf');
+  font-display: swap;
+}
