@@ -52,10 +52,6 @@ export default class InspectorJS {
       for (const key2 in prop.properties) {
         const property = prop.properties[key2];
 
-        
-
-        
-
         if (property == 'hr') {
           console.log("---------------------------------------------------")
           let hr = this.templates.create.hr();
