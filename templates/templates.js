@@ -9,13 +9,15 @@
  * import templates from './templates/templates.js';
  */
 
+import Create from "./create.js"
+
 /**
  * Класс для работы с шаблонами
  * @class
  */
 export default class templates {
   #container = undefined;
-  create = undefined;
+  #create = undefined;
 
   /**
    * Конструктор класса templates
@@ -24,7 +26,7 @@ export default class templates {
    */
   constructor() {
     this.#container = this.randomString();
-    this.create = new Create(this);
+    this.#create = new Create(this);
   }
 
   randomString(
@@ -44,73 +46,13 @@ export default class templates {
    * @returns Возвращает контейнер для навигатора в виде строки с замененными полями
    */
   get container() {
-    let f = this.create.container(this.#container);
+    let f = this.#create.container(this.#container);
     return f;
   }
+
+  get create(){
+    return this.#create;
+  }
+
 };
 
-class Create {
-  parent = undefined;
-
-  /**
-   * Конструктор класса templates
-   * @constructor
-   * @returns {void}
-   */
-  constructor(parent) {
-    this.parent = parent
-  }
-
-  /**
-   * Создает контейнер для навигатора и возвращает его
-   * @returns Возвращает контейнер для навигатора
-   */
-  container(id) {
-    let inspector = document.createElement("InspectorJS");
-    inspector.classList.add("InspectorJS_container");
-    inspector.setAttribute("id", id);
-
-    return inspector;
-  }
-
-  group(id = a.randomString()) {
-    let group = document.createElement("inspectorjs_group");
-    group.setAttribute("open", "false");
-
-    if (id) {
-      group.setAttribute("id", id);
-    }
-
-    return group;
-  }
-
-  title(name = "Без имени", icon = "icons-favorite") {
-    let title = document.createElement("inspectorjs_title");
-    let inspectorjs_left = document.createElement("div");
-    let inspectorjs_right = document.createElement("div");
-    let button_more = document.createElement("button");
-    let inspectorjs_left_icon = document.createElement("div");
-    let inspectorjs_left_name = document.createElement("div");
-
-    inspectorjs_left.classList.add("inspectorjs_left");
-    inspectorjs_right.classList.add("inspectorjs_right");
-
-    button_more.classList.add("icons-right");
-    button_more.classList.add("inspectorjs_left_more");
-
-    inspectorjs_left_icon.classList.add("inspectorjs_left_icon");
-    inspectorjs_left_icon.classList.add(icon);
-
-    inspectorjs_left_name.classList.add("inspectorjs_left_name");
-    inspectorjs_left_name.innerHTML = name;
-
-    inspectorjs_left.appendChild(button_more);
-    inspectorjs_left.appendChild(inspectorjs_left_icon);
-    inspectorjs_left.appendChild(inspectorjs_left_name);
-
-    title.appendChild(inspectorjs_left);
-    title.appendChild(inspectorjs_right);
-
-    return title;
-  }
-};

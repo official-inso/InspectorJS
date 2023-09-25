@@ -19,6 +19,7 @@ import templates from './templates/templates.js';
 export default class InspectorJS {
 
   #value = undefined;
+  
 
   /**
    * Инициализация навигатора по переданному селектору или элементу
@@ -36,6 +37,23 @@ export default class InspectorJS {
 
   getValue(){
     
+    let container = document.getElementById(this.templates.container.getAttribute('id'));
+
+    for (const key in this.#value) {
+      const prop = this.#value[key];
+      console.log(prop)
+
+      let group = this.templates.create.group(prop.id, prop.open);
+      let title = this.templates.create.title(prop.name, prop.icon, prop.buttons);
+
+      group.appendChild(title);
+      container.appendChild(group);
+    }
+
+    
+
+
+
   }
 
   #createInspector(selector) {
