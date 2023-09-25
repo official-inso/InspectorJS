@@ -41,18 +41,35 @@ export default class InspectorJS {
 
     for (const key in this.#value) {
       const prop = this.#value[key];
-      console.log(prop)
+      console.group(key)
+      console.log("Main property (" + key + "): ", prop)
 
       let group = this.templates.create.group(prop.id, prop.open);
       let title = this.templates.create.title(prop.name, prop.icon, prop.buttons);
 
       group.appendChild(title);
+
+      for (const key2 in prop.properties) {
+        const property = prop.properties[key2];
+
+        
+
+        
+
+        if (property == 'hr') {
+          console.log("---------------------------------------------------")
+          let hr = this.templates.create.hr();
+          group.appendChild(hr)
+        } else {
+          console.log("Property (" + key2 + "): ", property)
+        }
+
+        
+        
+      }
       container.appendChild(group);
+      console.groupEnd(key)
     }
-
-    
-
-
 
   }
 

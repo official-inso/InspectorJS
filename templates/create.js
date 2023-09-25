@@ -91,4 +91,9 @@ export default class Create {
 
     return button;
   }
+
+  hr() {
+    return document.createElement('inspectorjs_hr');
+  }
+
 };
