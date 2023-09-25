@@ -59,8 +59,6 @@ export default class InspectorJS {
         } else {
           console.log("Property (" + key2 + "): ", property)
         }
-
-        
         
       }
       container.appendChild(group);
