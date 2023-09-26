@@ -37,17 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
           name: "Мультистроковое значение", // Название свойства (default: "Без названия")
           property: "param1", // Произвольное значение (default: undefined)
           type: "multiString", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
-          value: "Hello Hello Hello Hello Helloworld!", // Значение свойства (default: "")
-          readonly: false, // Флаг только для чтения (default: false)
-          change: (value, property, elem, id, e) => {
-            console.log(value, property, elem, id, e);
-          }, // Функция callback при изменении значения (default: undefined)
-        },
-        {
-          id: "rndString1", // ID свойства (default: randomString(32))
-          name: "Мультистроковое значение", // Название свойства (default: "Без названия")
-          property: "param1", // Произвольное значение (default: undefined)
-          type: "multiString", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
           value: "Hello world!", // Значение свойства (default: "")
           readonly: false, // Флаг только для чтения (default: false)
           change: (value, property, elem, id, e) => {
@@ -126,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
           name: "Выбор цвета", // Название свойства (default: "Без названия")
           property: "param7", // Произвольное значение (default: undefined)
           type: "color", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
-          value: "#F0966a", // Значение свойства (default: undefined)
+          value: "#000000", // Значение свойства (default: undefined)
           readonly: false, // Флаг только для чтения (default: false)
           change: (value, property, elem, id, e) => {
             console.log(value, property, elem, id, e);
@@ -156,9 +145,9 @@ document.addEventListener('DOMContentLoaded', function() {
           value: [
             {
               name: "Size", // Название свойства (default: "Без названия")
-              type: "float", // string | integer | float | color | select (default: "string")
+              type: "color", // string | integer | float | color | select (default: "string")
               id: "param100", // ID свойства (default: randomString(32))
-              value: 0.1, // Значение свойства (default: 0)
+              value: undefined, // Значение свойства (default: 0)
               min: 0, // Минимальное значение (default: 0)
               max: 100, // Максимальное значение (default: 100)
               step: 0.01, // Шаг изменения (default: 1)

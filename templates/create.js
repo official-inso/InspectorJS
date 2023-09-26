@@ -221,7 +221,8 @@ export default class Create {
     max = 100,
     step = 1,
     id = this.parent.randomString(),
-    change
+    change,
+    groupEvent = false
   ) {
     let inspectorjs_value = document.createElement("inspectorjs_value");
     let letinspectorjs_value_property = document.createElement("div");
@@ -269,7 +270,7 @@ export default class Create {
     input.setAttribute("step", step);
 
     input.addEventListener("input", (e) => {
-      this.parent.debounce(function () {
+      this.parent.debounce(() => {
         let val = e.target.value;
         const initialValue = e.target.getAttribute("initial-value");
 
@@ -296,7 +297,15 @@ export default class Create {
           e.target.value = val;
 
           if (change) {
-            change(parseInt(val), property, e.target, id, e);
+            if(groupEvent) {
+              const arr = this.returnsGroupValue(
+                e.target.parentElement.parentElement.parentElement
+              );
+              change(parseInt(val), arr, property, e.target, id, e);
+            } else {
+              change(parseInt(val), property, e.target, id, e);
+            }
+            
           }
         }
       }, 500)();
@@ -318,7 +327,8 @@ export default class Create {
     max = 100,
     step = 1,
     id = this.parent.randomString(),
-    change
+    change,
+    groupEvent = false
   ) {
     let inspectorjs_value = document.createElement("inspectorjs_value");
     let letinspectorjs_value_property = document.createElement("div");
@@ -352,7 +362,7 @@ export default class Create {
     input.setAttribute("step", step);
 
     input.addEventListener("input", (e) => {
-      this.parent.debounce(function () {
+      this.parent.debounce(() => {
         let val = e.target.value;
         const initialValue = e.target.getAttribute("initial-value");
 
@@ -377,8 +387,17 @@ export default class Create {
           const stepValue = parseFloat(val).toFixed(stepLength);
 
           if (change) {
-            change(parseFloat(stepValue), property, e.target, id, e);
+            if (groupEvent) {
+              const arr = this.returnsGroupValue(
+                e.target.parentElement.parentElement.parentElement
+              );
+              change(parseFloat(stepValue), arr, property, e.target, id, e);
+            } else {
+              change(parseFloat(stepValue), property, e.target, id, e);
+            }
           }
+
+          
 
           e.target.setAttribute("value", stepValue);
           e.target.value = stepValue;
@@ -465,7 +484,8 @@ export default class Create {
     property = undefined,
     readonly = false,
     id = this.parent.randomString(),
-    change
+    change,
+    groupEvent = false
   ) {
     let inspectorjs_value = document.createElement("inspectorjs_value");
     let letinspectorjs_value_property = document.createElement("div");
@@ -498,29 +518,38 @@ export default class Create {
     input.setAttribute("initial-value", value);
     property ? input.setAttribute("property", property) : null;
 
-    if (change) {
-      input.addEventListener("input", (e) => {
-        this.parent.debounce(() => {
-          const val = e.target.value;
-          const initialValue = e.target.getAttribute("initial-value");
+    input.addEventListener("input", (e) => {
+      this.parent.debounce(() => {
+        const val = e.target.value;
+        const initialValue = e.target.getAttribute("initial-value");
 
-          if (val != initialValue) {
-            e.target.setAttribute("value", val);
-            e.target.setAttribute("initial-value", val);
-            label.setAttribute("title", val);
-            span.setAttribute("title", val);
-            span.innerHTML = val;
-            label.style.backgroundColor = val;
+        if (val != initialValue) {
+          e.target.setAttribute("value", val);
+          e.target.setAttribute("initial-value", val);
+          label.setAttribute("title", val);
+          span.setAttribute("title", val);
+          span.innerHTML = val;
+          label.style.backgroundColor = val;
 
-            this.parent.isBrightColor(val)
-              ? (span.style.color = "#000")
-              : (span.style.color = "#fff");
+          this.parent.isBrightColor(val)
+            ? (span.style.color = "#000")
+            : (span.style.color = "#fff");
 
-            change(val, property, e.target, id, e);
+          if (change) {
+            if (groupEvent) {
+              const arr = this.returnsGroupValue(
+                e.target.parentElement.parentElement.parentElement.parentElement
+              );
+              change(val, arr, property, e.target, id, e);
+            } else {
+              change(val, property, e.target, id, e);
+            }
           }
-        }, 250)();
-      });
-    }
+
+          
+        }
+      }, 250)();
+    });
 
     label.appendChild(span);
     label.appendChild(input);
@@ -538,7 +567,8 @@ export default class Create {
     readonly = false,
     options = [],
     id = this.parent.randomString(),
-    change
+    change,
+    groupEvent = false
   ) {
     let inspectorjs_value = document.createElement("inspectorjs_value");
     let letinspectorjs_value_property = document.createElement("div");
@@ -570,19 +600,31 @@ export default class Create {
       select.appendChild(optionElement);
     }
 
-    if (change) {
-      select.addEventListener("change", (e) => {
-        this.parent.debounce(function () {
-          const val = e.target.value;
-          const initialValue = e.target.getAttribute("initial-value");
+    
+    select.addEventListener("change", (e) => {
+      this.parent.debounce(() => {
+        const val = e.target.value;
+        const initialValue = e.target.getAttribute("initial-value");
 
-          if (val != initialValue) {
-            e.target.setAttribute("initial-value", val);
-            change(val, property, e.target, id, e);
+        if (val != initialValue) {
+          
+
+          if (change) {
+            if (groupEvent) {
+              const arr = this.returnsGroupValue(
+                e.target.parentElement.parentElement.parentElement
+                  .parentElement
+              );
+              change(val, arr, property, e.target, id, e);
+            } else {
+              e.target.setAttribute("initial-value", val);
+              change(val, property, e.target, id, e);
+            }
           }
-        }, 50)();
-      });
-    }
+        }
+      }, 50)();
+    });
+    
 
     inspectorjs_value_value.appendChild(select);
     inspectorjs_value.appendChild(letinspectorjs_value_property);
@@ -848,7 +890,8 @@ export default class Create {
         data.max,
         data.step,
         data.id,
-        data.change
+        data.change,
+        true,
       );
     } else if (data.type == "float") {
       out = this.valueFloat(
@@ -860,7 +903,8 @@ export default class Create {
         data.max,
         data.step,
         data.id,
-        data.change
+        data.change,
+        true
       );
     } else if (data.type == "color") {
       out = this.valueColor(
@@ -869,7 +913,8 @@ export default class Create {
         data.id,
         data.readonly,
         data.id,
-        data.change
+        data.change,
+        true,
       );
     } else if (data.type == "select") {
       out = this.valueSelect(
@@ -879,7 +924,8 @@ export default class Create {
         data.readonly,
         data.options,
         data.id,
-        data.change
+        data.change,
+        true,
       );
     } else {
       out = this.valueString(
@@ -888,10 +934,43 @@ export default class Create {
         data.id,
         data.readonly,
         data.id,
-        data.change
+        data.change,
+        true
       );
     }
 
     return out;
+  }
+
+  returnsGroupValue(gr){
+    let arr = [];
+    let valuesInputs = gr.querySelectorAll("input");
+    let valuesSelected = gr.querySelectorAll("select");
+
+    for (const key4 in valuesInputs) {
+      const valu = valuesInputs[key4];
+      if (valu.getAttribute) {
+        if (valu.getAttribute("property")) {
+          arr.push({
+            id: valu.getAttribute("property"),
+            value: valu.value,
+          });
+        }
+      }
+    }
+
+    for (const key4 in valuesSelected) {
+      const valu = valuesSelected[key4];
+      if (valu.getAttribute) {
+        if (valu.getAttribute("property")) {
+          arr.push({
+            id: valu.getAttribute("property"),
+            value: valu.value,
+          });
+        }
+      }
+    }
+
+    return arr;
   }
 };
