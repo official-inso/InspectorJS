@@ -41,8 +41,8 @@ export default class InspectorJS {
 
     for (const key in this.#value) {
       const prop = this.#value[key];
-      console.group(key)
-      console.log("Main property (" + key + "): ", prop)
+      // console.group(key)
+      // console.log("Main property (" + key + "): ", prop)
 
       let group = this.templates.create.group(prop.id, prop.show);
       let title = this.templates.create.title(prop.name, prop.icon, prop.buttons);
@@ -53,23 +53,11 @@ export default class InspectorJS {
         const property = prop.properties[key2];
 
         if (property == 'hr') {
-          console.log("---------------------------------------------------")
+          // console.log("---------------------------------------------------")
           let hr = this.templates.create.hr();
           group.appendChild(hr)
         } else {
-          console.log("Property (" + key2 + "): ", property)
-
-          if(property.type == 'string'){
-            let input = this.templates.create.valueString(
-              property.value,
-              property.name,
-              property.property,
-              property.readonly,
-              property.id,
-              property.change
-            );
-            group.appendChild(input)
-          }
+          // console.log("Property (" + key2 + "): ", property)
 
           if(property.type == 'integer'){
             let input = this.templates.create.valueInteger(
@@ -86,7 +74,7 @@ export default class InspectorJS {
             group.appendChild(input)
           }
 
-          if(property.type == 'float'){
+          else if(property.type == 'float'){
             let input = this.templates.create.valueFloat(
               property.value,
               property.name,
@@ -101,7 +89,7 @@ export default class InspectorJS {
             group.appendChild(input)
           }
 
-          if(property.type == 'boolean'){
+          else if(property.type == 'boolean'){
             let input = this.templates.create.valueBoolean(
               property.value,
               property.name,
@@ -113,7 +101,7 @@ export default class InspectorJS {
             group.appendChild(input)
           }
 
-          if(property.type == 'color'){
+          else if(property.type == 'color'){
             let input = this.templates.create.valueColor(
               property.value,
               property.name,
@@ -125,7 +113,7 @@ export default class InspectorJS {
             group.appendChild(input)
           }
 
-          if(property.type == 'select'){
+          else if(property.type == 'select'){
             let input = this.templates.create.valueSelect(
               property.value,
               property.name,
@@ -138,7 +126,7 @@ export default class InspectorJS {
             group.appendChild(input)
           }
 
-          if(property.type == 'file'){
+          else if(property.type == 'file'){
             let input = this.templates.create.valueFile(
               property.value,
               property.name,
@@ -150,12 +138,63 @@ export default class InspectorJS {
             group.appendChild(input)
           }
 
+          else if(property.type == 'slider'){
+            let input = this.templates.create.valueSlider(
+              property.value,
+              property.name,
+              property.property,
+              property.readonly,
+              property.min,
+              property.max,
+              property.step,
+              property.id,
+              property.change
+            );
+            group.appendChild(input)
+          }
+
+          else if (property.type == "values") {
+            let input = this.templates.create.valueValues(
+              property.value,
+              property.name,
+              property.property,
+              property.group,
+              property.id,
+              property.change
+            );
+            group.appendChild(input);
+          }
+
+          else if (property.type == "multiString") {
+            let input = this.templates.create.valueMultiString(
+              property.value,
+              property.name,
+              property.property,
+              property.readonly,
+              property.id,
+              property.change
+            );
+            group.appendChild(input);
+          }
+          
+          else {
+            let input = this.templates.create.valueString(
+              property.value,
+              property.name,
+              property.property,
+              property.readonly,
+              property.id,
+              property.change
+            );
+            group.appendChild(input);
+          }
+
 
         }
         
       }
       container.appendChild(group);
-      console.groupEnd(key)
+      // console.groupEnd(key)
     }
 
   }

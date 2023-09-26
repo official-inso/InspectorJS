@@ -154,6 +154,7 @@ div#content {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
   max-width: 350px;
+  width: 100%;
   background-color: var(--bg1);
 }
 
@@ -365,7 +366,7 @@ inspectorjs_value {
   align-content: center;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 0px;
   position: relative;
 }
 
@@ -377,7 +378,7 @@ inspectorjs_value:last-child {
   font-family: 'gl';
   font-size: 13px;
   line-height: 12px;
-  max-width: 40%;
+  max-width: 100%;
   /* width: 40%; */
   /* word-break: break-all; */
   word-wrap: break-word;
@@ -420,19 +421,22 @@ inspectorjs_value:last-child {
   gap: 5px;
   padding-left: 10px;
 }
+
 .inspectorjs_value_value[group="4"] {
   grid-template-columns: repeat(4, 1fr);
 }
-.inspectorjs_value_value[group="3"]{
+
+.inspectorjs_value_value[group="3"] {
   grid-template-columns: repeat(3, 1fr);
 }
+
 .inspectorjs_value_value[group="1"] {
   grid-template-columns: repeat(1, 1fr);
 }
 
 
 
-.inspectorjs_value_value[group]:before{
+.inspectorjs_value_value[group]:before {
   display: none;
 }
 
@@ -461,7 +465,8 @@ inspectorjs_value:focus-within:after {
 
 
 
-.inspectorjs_value_value>input {
+.inspectorjs_value_value>input,
+.inspectorjs_value_value>textarea {
   border: none;
   border-radius: var(--radius-md);
   background-color: #7e7e7e1c;
@@ -500,7 +505,7 @@ inspectorjs input[type=number] {
   cursor: pointer;
 }
 
-.inspectorjs_value_value > *[disabled='disabled']{
+.inspectorjs_value_value>*[disabled='disabled'] {
   cursor: not-allowed !important;
 }
 
@@ -689,7 +694,7 @@ input[type="color"] {
   display: none;
 }
 
-.inspectorjs_value_value_group {
+.inspectorjs_value_value[group]>inspectorjs_value {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -697,14 +702,28 @@ input[type="color"] {
   justify-content: center;
   align-items: center;
   gap: 3px;
+  margin-bottom: 0px;
 }
 
-.inspectorjs_value_value_group label {
+.inspectorjs_value_value[group]>inspectorjs_value>.inspectorjs_value_property {
   font-family: gl;
   font-size: 10px;
+  max-width: 100% !important;
+  line-height: initial;
+  display: block;
+  padding-right: 0px;
+  width: 100%;
+  text-align: center;
 }
 
-.inspectorjs_value_value_group input {
+.inspectorjs_value_value[group]>inspectorjs_value>.inspectorjs_value_value {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  display: block;
+}
+
+.inspectorjs_value_value[group]>inspectorjs_value>.inspectorjs_value_value>input {
   border: none;
   border-radius: var(--radius-md);
   background-color: #7e7e7e1c;
@@ -716,7 +735,15 @@ input[type="color"] {
   text-align: center;
 }
 
-.colorChanger{
+.inspectorjs_value_value[group] .inspectorjs_value_value:before {
+  display: none;
+}
+
+.inspectorjs_value_value[group] inspectorjs_value:after {
+  display: none;
+}
+
+.colorChanger {
   position: relative;
   padding: 5px 10px;
   color: #fff;
@@ -725,4 +752,7 @@ input[type="color"] {
   border-radius: var(--radius-md);
   user-select: none;
   cursor: pointer;
+  min-height: 25px;
+  display: block;
+  text-align: center;
 }

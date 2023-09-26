@@ -1,3 +1,5 @@
+import Text from "../methods/Tetx.js";
+
 export default class Create {
   parent = undefined;
 
@@ -149,6 +151,67 @@ export default class Create {
     return inspectorjs_value;
   }
 
+  valueMultiString(
+    value,
+    text = "Без определения",
+    property = undefined,
+    readonly = false,
+    id = this.parent.randomString(),
+    change
+  ) {
+    let inspectorjs_value = document.createElement("inspectorjs_value");
+    let letinspectorjs_value_property = document.createElement("div");
+    let inspectorjs_value_value = document.createElement("div");
+    let input = document.createElement("textarea");
+
+    inspectorjs_value.setAttribute("id", id);
+    letinspectorjs_value_property.classList.add("inspectorjs_value_property");
+    letinspectorjs_value_property.innerHTML = text;
+
+    inspectorjs_value_value.classList.add("inspectorjs_value_value");
+    inspectorjs_value_value.setAttribute("full", "true");
+
+    input.setAttribute("type", "text");
+    readonly ? input.setAttribute("readonly", readonly) : null;
+    input.setAttribute("value", value);
+    input.setAttribute("title", value);
+    input.setAttribute("initial-value", value);
+    property ? input.setAttribute("property", property) : null;
+
+    input.style.maxWidth = "calc(100% - 10px)";
+    input.style.width = "100%";
+    input.style.minWidth = "calc(100% - 10px)";
+    input.style.maxHeight = "200px";
+    input.style.minHeight = "25px";
+    input.style.height = 'auto';
+    input.style.resize = "vertical";
+    input.style.lineHeight = "14px"; 
+
+    input.value = value;
+
+    if (change) {
+      input.addEventListener("input", (e) => {
+        this.parent.debounce(function () {
+          const value = e.target.value;
+          const initialValue = e.target.getAttribute("initial-value");
+
+          if (value != initialValue) {
+            e.target.setAttribute("value", value);
+            e.target.setAttribute("initial-value", value);
+            e.target.setAttribute("title", value);
+            change(value, property, e.target, id, e);
+          }
+        }, 500)();
+      });
+    }
+
+    inspectorjs_value_value.appendChild(input);
+    inspectorjs_value.appendChild(letinspectorjs_value_property);
+    inspectorjs_value.appendChild(inspectorjs_value_value);
+
+    return inspectorjs_value;
+  }
+
   valueInteger(
     value,
     text = "Без определения",
@@ -173,30 +236,71 @@ export default class Create {
     inspectorjs_value_value.setAttribute("full", "true");
 
     input.setAttribute("type", "number");
+
+    readonly ? input.setAttribute("readonly", readonly) : null;
+
+    property ? input.setAttribute("property", property) : null;
+
+    if (min) {
+      if (parseInt(value) < min) {
+        value = min;
+      }
+    }
+
+    if (max) {
+      if (parseInt(value) > max) {
+        value = max;
+      }
+    }
+
+    if (step) {
+      step = parseInt(step);
+    }
+
+    if (typeof parseInt(value) != "number") value = 0;
+
+    input.setAttribute("value", parseInt(value));
+    input.setAttribute("title", parseInt(value));
+    input.setAttribute("initial-value", parseInt(value));
+    input.value = parseInt(value);
+
     input.setAttribute("min", min);
     input.setAttribute("max", max);
     input.setAttribute("step", step);
-    readonly ? input.setAttribute("readonly", readonly) : null;
-    input.setAttribute("value", value);
-    input.setAttribute("title", value);
-    input.setAttribute("initial-value", value);
-    property ? input.setAttribute("property", property) : null;
 
-    if (change) {
-      input.addEventListener("input", (e) => {
-        this.parent.debounce(function () {
-          const value = e.target.value;
-          const initialValue = e.target.getAttribute("initial-value");
+    input.addEventListener("input", (e) => {
+      this.parent.debounce(function () {
+        let val = e.target.value;
+        const initialValue = e.target.getAttribute("initial-value");
 
-          if (value != initialValue) {
-            e.target.setAttribute("value", value);
-            e.target.setAttribute("initial-value", value);
-            e.target.setAttribute("title", value);
-            change(parseInt(value), property, e.target, id, e);
+        if (val != initialValue) {
+          if (min) {
+            if (parseInt(val) < min) {
+              val = min;
+            }
           }
-        }, 500)();
-      });
-    }
+
+          if (max) {
+            if (parseInt(val) > max) {
+              val = max;
+            }
+          }
+
+          if (val == "") val = 0;
+          if (typeof parseInt(val) != "number") val = 0;
+
+          e.target.setAttribute("value", val);
+          e.target.setAttribute("initial-value", val);
+          e.target.setAttribute("title", val);
+
+          e.target.value = val;
+
+          if (change) {
+            change(parseInt(val), property, e.target, id, e);
+          }
+        }
+      }, 500)();
+    });
 
     inspectorjs_value_value.appendChild(input);
     inspectorjs_value.appendChild(letinspectorjs_value_property);
@@ -229,36 +333,60 @@ export default class Create {
     inspectorjs_value_value.setAttribute("full", "true");
 
     input.setAttribute("type", "number");
-    input.setAttribute("min", min);
-    input.setAttribute("max", max);
-    input.setAttribute("step", step);
+
+    if (step) {
+      const _stepLength = step.toString().split(".")[1].length;
+      input.setAttribute("value", parseFloat(value).toFixed(_stepLength));
+    } else {
+      input.setAttribute("value", step);
+    }
+
     readonly ? input.setAttribute("readonly", readonly) : null;
-    input.setAttribute("value", value);
+
     input.setAttribute("title", value);
     input.setAttribute("initial-value", value);
     property ? input.setAttribute("property", property) : null;
 
-    if (change) {
-      input.addEventListener("input", (e) => {
-        this.parent.debounce(function () {
-          const value = e.target.value;
-          const initialValue = e.target.getAttribute("initial-value");
+    input.setAttribute("min", min);
+    input.setAttribute("max", max);
+    input.setAttribute("step", step);
 
-          if (value != initialValue) {
-            const step = e.target.getAttribute("step");
-            const stepLength = step.toString().split(".")[1].length;
-            const stepValue = parseFloat(value).toFixed(stepLength);
+    input.addEventListener("input", (e) => {
+      this.parent.debounce(function () {
+        let val = e.target.value;
+        const initialValue = e.target.getAttribute("initial-value");
 
-            change(parseFloat(stepValue), property, e.target, id, e);
-
-            e.target.setAttribute("value", stepValue);
-            e.target.value = stepValue;
-            e.target.setAttribute("initial-value", stepValue);
-            e.target.setAttribute("title", stepValue);
+        if (val != initialValue) {
+          if (min) {
+            if (parseFloat(val) < min) {
+              val = min;
+            }
           }
-        }, 500)();
-      });
-    }
+
+          if (max) {
+            if (parseFloat(val) > max) {
+              val = max;
+            }
+          }
+
+          if (val == "") val = 0;
+          if (typeof parseFloat(val) != "number") val = 0;
+
+          const step = e.target.getAttribute("step");
+          const stepLength = step.toString().split(".")[1].length;
+          const stepValue = parseFloat(val).toFixed(stepLength);
+
+          if (change) {
+            change(parseFloat(stepValue), property, e.target, id, e);
+          }
+
+          e.target.setAttribute("value", stepValue);
+          e.target.value = stepValue;
+          e.target.setAttribute("initial-value", stepValue);
+          e.target.setAttribute("title", stepValue);
+        }
+      }, 500)();
+    });
 
     inspectorjs_value_value.appendChild(input);
     inspectorjs_value.appendChild(letinspectorjs_value_property);
@@ -332,7 +460,7 @@ export default class Create {
   }
 
   valueColor(
-    value,
+    value = "#000000",
     text = "Без определения",
     property = undefined,
     readonly = false,
@@ -502,7 +630,7 @@ export default class Create {
           const val = e.target.value;
           const initialValue = e.target.getAttribute("initial-value");
 
-          if(e.target.files.length > 0) {
+          if (e.target.files.length > 0) {
             if (val != initialValue) {
               e.target.setAttribute("value", val);
               e.target.setAttribute("initial-value", val);
@@ -517,19 +645,16 @@ export default class Create {
                 fileSize +
                 ")</span>";
 
-
               change(e.target.files[0], property, e.target, id, e);
             }
           } else {
             e.target.setAttribute("value", val);
             e.target.setAttribute("initial-value", val);
 
-            span.innerHTML ="Файл не выбран";
+            span.innerHTML = "Файл не выбран";
 
             span.setAttribute("title", "Файл не выбран");
           }
-
-          
         }, 250)();
       });
     }
@@ -541,5 +666,232 @@ export default class Create {
     inspectorjs_value.appendChild(inspectorjs_value_value);
 
     return inspectorjs_value;
+  }
+
+  valueSlider(
+    value,
+    name = "Без имени",
+    property = undefined,
+    readonly = false,
+    min = 0,
+    max = 100,
+    step = 1,
+    id = this.parent.randomString(),
+    change
+  ) {
+    let inspectorjs_value = document.createElement("inspectorjs_value");
+    let letinspectorjs_value_property = document.createElement("div");
+    let inspectorjs_value_value = document.createElement("div");
+
+    let input_range = document.createElement("input");
+    let input_number = document.createElement("input");
+
+    inspectorjs_value.setAttribute("id", id);
+    letinspectorjs_value_property.classList.add("inspectorjs_value_property");
+    letinspectorjs_value_property.innerHTML = name;
+
+    inspectorjs_value_value.classList.add("inspectorjs_value_value");
+    inspectorjs_value_value.setAttribute("full", "true");
+
+    input_range.setAttribute("type", "range");
+    input_range.setAttribute("min", min);
+    input_range.setAttribute("max", max);
+    input_range.setAttribute("step", step);
+
+    if (step) {
+      const _stepLength = step.toString().split(".")[1].length;
+      input_range.setAttribute("value", parseFloat(value).toFixed(_stepLength));
+      input_number.setAttribute(
+        "value",
+        parseFloat(value).toFixed(_stepLength)
+      );
+    } else {
+      input_range.setAttribute("value", step);
+      input_number.setAttribute("value", step);
+    }
+
+    readonly ? input_range.setAttribute("readonly", readonly) : null;
+    input_range.setAttribute("initial-value", value);
+    property ? input_range.setAttribute("property", property) : null;
+
+    input_number.setAttribute("type", "number");
+    input_number.setAttribute("min", min);
+    input_number.setAttribute("max", max);
+    input_number.setAttribute("step", step);
+    readonly ? input_number.setAttribute("readonly", readonly) : null;
+    input_number.setAttribute("initial-value", value);
+    property ? input_number.setAttribute("property", property) : null;
+    input_number.style.maxWidth = "63px";
+
+    input_range.addEventListener("input", (e) => {
+      let val = e.target.value;
+
+      if (min) {
+        if (parseFloat(val) < min) {
+          val = min;
+        }
+      }
+
+      if (max) {
+        if (parseFloat(val) > max) {
+          val = max;
+        }
+      }
+
+      if (step) {
+        const _stepLength = step.toString().split(".")[1].length;
+        input_number.value = parseFloat(val).toFixed(_stepLength);
+      } else {
+        input_number.value = val;
+      }
+
+      if (change) {
+        this.parent.debounce(function () {
+          change(parseFloat(val), property, e.target, id, e);
+        }, 500)();
+      }
+    });
+
+    input_number.addEventListener("input", (e) => {
+      let val = e.target.value;
+
+      if (min) {
+        if (parseFloat(val) < min) {
+          val = min;
+        }
+      }
+
+      if (max) {
+        if (parseFloat(val) > max) {
+          val = max;
+        }
+      }
+
+      if (step) {
+        const _stepLength = step.toString().split(".")[1].length;
+        input_range.value = parseFloat(val).toFixed(_stepLength);
+      } else {
+        input_range.value = val;
+      }
+
+      if (change) {
+        this.parent.debounce(function () {
+          if (step) {
+            const _stepLength = step.toString().split(".")[1].length;
+            input_number.value = parseFloat(val).toFixed(_stepLength);
+          }
+
+          change(parseFloat(val), property, e.target, id, e);
+        }, 500)();
+      }
+    });
+
+    inspectorjs_value_value.appendChild(input_range);
+    inspectorjs_value_value.appendChild(input_number);
+
+    inspectorjs_value.appendChild(letinspectorjs_value_property);
+    inspectorjs_value.appendChild(inspectorjs_value_value);
+
+    return inspectorjs_value;
+  }
+
+  valueValues(
+    value,
+    name = "Без имени",
+    property = undefined,
+    group = "auto",
+    id = this.parent.randomString(),
+    change
+  ) {
+    let inspectorjs_value = document.createElement("inspectorjs_value");
+    let inspectorjs_value_property = document.createElement("div");
+    let inspectorjs_value_value = document.createElement("div");
+
+    inspectorjs_value.setAttribute("id", id);
+    inspectorjs_value_property.classList.add("inspectorjs_value_property");
+    inspectorjs_value_property.innerHTML = name;
+
+    if (group == "auto") {
+      if (value.length == 2) group = "2";
+      else if (value.length == 3) group = "3";
+      else if (value.length == 4) group = "4";
+      else group = "auto";
+    }
+
+    inspectorjs_value_value.classList.add("inspectorjs_value_value");
+    inspectorjs_value_value.setAttribute("group", group);
+
+    if (value.length > 0) {
+      for (const key in value) {
+        const element = value[key];
+        const group = this.valueValuesGroup(element, property);
+        inspectorjs_value_value.appendChild(group);
+      }
+    }
+
+    inspectorjs_value.appendChild(inspectorjs_value_property);
+    inspectorjs_value.appendChild(inspectorjs_value_value);
+
+    return inspectorjs_value;
+  }
+
+  valueValuesGroup(data, prop) {
+    let out;
+
+    if (data.type == "integer") {
+      out = this.valueInteger(
+        data.value,
+        data.name,
+        data.id,
+        data.readonly,
+        data.min,
+        data.max,
+        data.step,
+        data.id,
+        data.change
+      );
+    } else if (data.type == "float") {
+      out = this.valueFloat(
+        data.value,
+        data.name,
+        data.id,
+        data.readonly,
+        data.min,
+        data.max,
+        data.step,
+        data.id,
+        data.change
+      );
+    } else if (data.type == "color") {
+      out = this.valueColor(
+        data.value,
+        data.name,
+        data.id,
+        data.readonly,
+        data.id,
+        data.change
+      );
+    } else if (data.type == "select") {
+      out = this.valueSelect(
+        data.value,
+        data.name,
+        data.id,
+        data.readonly,
+        data.options,
+        data.id,
+        data.change
+      );
+    } else {
+      out = this.valueString(
+        data.value,
+        data.name,
+        data.id,
+        data.readonly,
+        data.id,
+        data.change
+      );
+    }
+
+    return out;
   }
 };
