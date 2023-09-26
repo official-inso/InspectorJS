@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
       properties: [
         {
           id: "rndString1",
-          name: "Человеческое название",
+          name: "Строковое значение",
           property: "param1",
           type: "string",
           value: "Hello world!",
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
           id: "rndString2",
-          name: "Человеческое название",
+          name: "Целочисленное значение",
           property: "param2",
           type: "integer",
           value: 50,
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
           id: "rndString3",
-          name: "Человеческое название",
+          name: "Дробное значение",
           property: "param3",
           type: "float",
           value: 1.5,
@@ -62,10 +62,10 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
           id: "rndString4",
-          name: "Человеческое название",
+          name: "Выпадающий список",
           property: "param4",
           type: "select",
-          value: "key1",
+          value: "key2",
           readonly: false,
           options: {
             key1: "value1",
@@ -79,10 +79,10 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
           id: "rndString5",
-          name: "Человеческое название",
+          name: "Выбор файла",
           property: "param5",
           type: "file",
-          value: "Название файла",
+          // value: "image.png",
           readonly: false,
           change: (value, property, elem, id, e) => {
             console.log(value, property, elem, id, e);
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
           id: "rndString6",
-          name: "Человеческое название",
+          name: "Логическое значение",
           property: "param6",
           type: "boolean",
           value: true,
@@ -101,10 +101,10 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
           id: "rndString7",
-          name: "Человеческое название",
+          name: "Выбор цвета",
           property: "param7",
           type: "color",
-          value: "#4f966a",
+          value: "#F0966a",
           readonly: false,
           change: (value, property, elem, id, e) => {
             console.log(value, property, elem, id, e);
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "hr",
         {
           id: "rndString8",
-          name: "Человеческое название",
+          name: "Ползунок",
           property: "param8",
           type: "slider",
           value: 50,
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
           id: "rndString9",
-          name: "Человеческое название",
+          name: "Множественные значения",
           property: "param9",
           type: "values",
           group: "auto",
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
       icon: "icons-folder",
       id: "rndString00",
       name: "Название группы",
-      show: true,
+      show: false,
       properties: [
         {
           id: "rndString01",

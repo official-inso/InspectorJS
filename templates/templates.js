@@ -55,11 +55,32 @@ export default class templates {
     };
   }
 
-  delay(func, wait) {
-    let timeout;
+  isBrightColor(hexColor) {
+    // Убираем символ # из HEX и конвертируем строку в число
+    const hexNumber = parseInt(hexColor.replace(/^#/, ""), 16);
 
-    
+    // Извлекаем компоненты R, G и B
+    const red = (hexNumber >> 16) & 255;
+    const green = (hexNumber >> 8) & 255;
+    const blue = hexNumber & 255;
 
+    // Считаем сумму компонент и сравниваем с пороговым значением
+    const brightness = (red + green + blue) / 3;
+
+    // Если сумма больше или равна 128, цвет считается ярким
+    return brightness >= 128;
+  }
+
+  formatBytes(bytes) {
+    const units = ["байт", "Кб", "Мб", "Гб", "Тб", "Пб", "Эб", "Зб", "Иб"];
+    let unitIndex = 0;
+
+    while (bytes >= 1024 && unitIndex < units.length - 1) {
+      bytes /= 1024;
+      unitIndex++;
+    }
+
+    return bytes.toFixed(2) + " " + units[unitIndex];
   }
 
   throttle(func, delay) {

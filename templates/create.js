@@ -282,7 +282,78 @@ export default class Create {
     let input = document.createElement("input");
     let label1 = document.createElement("label");
 
-    
+    const id2 = this.parent.randomString();
+
+    label.classList.add("checkbox");
+    label1.setAttribute("for", id2);
+    label.setAttribute("for", id2);
+    input.setAttribute("id", id2);
+
+    inspectorjs_value.setAttribute("id", id);
+    letinspectorjs_value_property.classList.add("inspectorjs_value_property");
+    letinspectorjs_value_property.innerHTML = text;
+
+    inspectorjs_value_value.classList.add("inspectorjs_value_value");
+
+    input.setAttribute("type", "checkbox");
+    readonly ? input.setAttribute("readonly", readonly) : null;
+    value ? input.setAttribute("checked", "checked") : null;
+
+    input.setAttribute("initial-checked", value);
+    property ? input.setAttribute("property", property) : null;
+
+    if (change) {
+      input.addEventListener("change", (e) => {
+        this.parent.debounce(function () {
+          e.target.setAttribute(
+            "initial-checked",
+            e.target.checked == "checked"
+          );
+
+          if (e.target.checked) {
+            e.target.setAttribute("checked", "checked");
+            change(true, property, e.target, id, e);
+          } else {
+            e.target.removeAttribute("checked");
+            change(false, property, e.target, id, e);
+          }
+        }, 100)();
+      });
+    }
+
+    label.appendChild(input);
+    label.appendChild(label1);
+
+    inspectorjs_value_value.appendChild(label);
+    inspectorjs_value.appendChild(letinspectorjs_value_property);
+    inspectorjs_value.appendChild(inspectorjs_value_value);
+
+    return inspectorjs_value;
+  }
+
+  valueColor(
+    value,
+    text = "Без определения",
+    property = undefined,
+    readonly = false,
+    id = this.parent.randomString(),
+    change
+  ) {
+    let inspectorjs_value = document.createElement("inspectorjs_value");
+    let letinspectorjs_value_property = document.createElement("div");
+    let inspectorjs_value_value = document.createElement("div");
+    let input = document.createElement("input");
+    let label = document.createElement("label");
+    let span = document.createElement("span");
+
+    span.innerHTML = value;
+
+    label.classList.add("colorChanger");
+    label.style.backgroundColor = value;
+
+    this.parent.isBrightColor(value)
+      ? (span.style.color = "#000")
+      : (span.style.color = "#fff");
 
     inspectorjs_value.setAttribute("id", id);
     letinspectorjs_value_property.classList.add("inspectorjs_value_property");
@@ -291,32 +362,181 @@ export default class Create {
     inspectorjs_value_value.classList.add("inspectorjs_value_value");
     inspectorjs_value_value.setAttribute("full", "true");
 
-
-
-    input.setAttribute("type", "checkbox");
+    input.setAttribute("type", "color");
     readonly ? input.setAttribute("readonly", readonly) : null;
     input.setAttribute("value", value);
-    input.setAttribute("title", value);
+    label.setAttribute("title", value);
+    span.setAttribute("title", value);
     input.setAttribute("initial-value", value);
     property ? input.setAttribute("property", property) : null;
 
     if (change) {
-      input.addEventListener("change", (e) => {
-        this.parent.debounce(function () {
-          const value = e.target.checked;
+      input.addEventListener("input", (e) => {
+        this.parent.debounce(() => {
+          const val = e.target.value;
           const initialValue = e.target.getAttribute("initial-value");
 
-          if (value != initialValue) {
-            e.target.setAttribute("value", value);
-            e.target.setAttribute("initial-value", value);
-            e.target.setAttribute("title", value);
-            change(value, property, e.target, id, e);
+          if (val != initialValue) {
+            e.target.setAttribute("value", val);
+            e.target.setAttribute("initial-value", val);
+            label.setAttribute("title", val);
+            span.setAttribute("title", val);
+            span.innerHTML = val;
+            label.style.backgroundColor = val;
+
+            this.parent.isBrightColor(val)
+              ? (span.style.color = "#000")
+              : (span.style.color = "#fff");
+
+            change(val, property, e.target, id, e);
           }
-        }, 100)();
+        }, 250)();
       });
     }
 
-    inspectorjs_value_value.appendChild(input);
+    label.appendChild(span);
+    label.appendChild(input);
+    inspectorjs_value_value.appendChild(label);
+    inspectorjs_value.appendChild(letinspectorjs_value_property);
+    inspectorjs_value.appendChild(inspectorjs_value_value);
+
+    return inspectorjs_value;
+  }
+
+  valueSelect(
+    value,
+    text = "Без определения",
+    property = undefined,
+    readonly = false,
+    options = [],
+    id = this.parent.randomString(),
+    change
+  ) {
+    let inspectorjs_value = document.createElement("inspectorjs_value");
+    let letinspectorjs_value_property = document.createElement("div");
+    let inspectorjs_value_value = document.createElement("div");
+    let select = document.createElement("select");
+
+    inspectorjs_value.setAttribute("id", id);
+    letinspectorjs_value_property.classList.add("inspectorjs_value_property");
+    letinspectorjs_value_property.innerHTML = text;
+
+    inspectorjs_value_value.classList.add("inspectorjs_value_value");
+    inspectorjs_value_value.setAttribute("full", "true");
+
+    select.setAttribute("type", "select");
+    readonly ? select.setAttribute("readonly", readonly) : null;
+    select.setAttribute("initial-value", value);
+    property ? select.setAttribute("property", property) : null;
+
+    for (const key in options) {
+      const option = options[key];
+      let optionElement = document.createElement("option");
+      optionElement.setAttribute("value", key);
+      optionElement.innerHTML = option;
+
+      if (key == value) {
+        optionElement.setAttribute("selected", "selected");
+      }
+
+      select.appendChild(optionElement);
+    }
+
+    if (change) {
+      select.addEventListener("change", (e) => {
+        this.parent.debounce(function () {
+          const val = e.target.value;
+          const initialValue = e.target.getAttribute("initial-value");
+
+          if (val != initialValue) {
+            e.target.setAttribute("initial-value", val);
+            change(val, property, e.target, id, e);
+          }
+        }, 50)();
+      });
+    }
+
+    inspectorjs_value_value.appendChild(select);
+    inspectorjs_value.appendChild(letinspectorjs_value_property);
+    inspectorjs_value.appendChild(inspectorjs_value_value);
+
+    return inspectorjs_value;
+  }
+
+  valueFile(
+    value,
+    text = "Без определения",
+    property = undefined,
+    readonly = false,
+    id = this.parent.randomString(),
+    change
+  ) {
+    let inspectorjs_value = document.createElement("inspectorjs_value");
+    let letinspectorjs_value_property = document.createElement("div");
+    let inspectorjs_value_value = document.createElement("div");
+    let input = document.createElement("input");
+    let label = document.createElement("label");
+    let span = document.createElement("span");
+
+    span.innerHTML = value ? value : "Файл не выбран";
+
+    label.classList.add("fileChanger");
+    label.style.backgroundColor = value;
+
+    inspectorjs_value.setAttribute("id", id);
+    letinspectorjs_value_property.classList.add("inspectorjs_value_property");
+    letinspectorjs_value_property.innerHTML = text;
+
+    inspectorjs_value_value.classList.add("inspectorjs_value_value");
+    inspectorjs_value_value.setAttribute("full", "true");
+
+    input.setAttribute("type", "file");
+    readonly ? input.setAttribute("readonly", readonly) : null;
+    span.setAttribute("title", value ? value : "Файл не выбран");
+    input.setAttribute("initial-value", value);
+    property ? input.setAttribute("property", property) : null;
+
+    if (change) {
+      input.addEventListener("input", (e) => {
+        this.parent.debounce(() => {
+          const val = e.target.value;
+          const initialValue = e.target.getAttribute("initial-value");
+
+          if(e.target.files.length > 0) {
+            if (val != initialValue) {
+              e.target.setAttribute("value", val);
+              e.target.setAttribute("initial-value", val);
+
+              span.setAttribute("title", value ? value : "Файл не выбран");
+
+              // Получаем размер файла
+              const fileSize = this.parent.formatBytes(e.target.files[0].size);
+              span.innerHTML =
+                val.split("\\").pop() +
+                " <span style='font-size: 12px; opacity: 0.5;'>(" +
+                fileSize +
+                ")</span>";
+
+
+              change(e.target.files[0], property, e.target, id, e);
+            }
+          } else {
+            e.target.setAttribute("value", val);
+            e.target.setAttribute("initial-value", val);
+
+            span.innerHTML ="Файл не выбран";
+
+            span.setAttribute("title", "Файл не выбран");
+          }
+
+          
+        }, 250)();
+      });
+    }
+
+    label.appendChild(span);
+    label.appendChild(input);
+    inspectorjs_value_value.appendChild(label);
     inspectorjs_value.appendChild(letinspectorjs_value_property);
     inspectorjs_value.appendChild(inspectorjs_value_value);
 

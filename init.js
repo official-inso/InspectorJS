@@ -44,7 +44,7 @@ export default class InspectorJS {
       console.group(key)
       console.log("Main property (" + key + "): ", prop)
 
-      let group = this.templates.create.group(prop.id, prop.open);
+      let group = this.templates.create.group(prop.id, prop.show);
       let title = this.templates.create.title(prop.name, prop.icon, prop.buttons);
 
       group.appendChild(title);
@@ -103,6 +103,43 @@ export default class InspectorJS {
 
           if(property.type == 'boolean'){
             let input = this.templates.create.valueBoolean(
+              property.value,
+              property.name,
+              property.property,
+              property.readonly,
+              property.id,
+              property.change
+            );
+            group.appendChild(input)
+          }
+
+          if(property.type == 'color'){
+            let input = this.templates.create.valueColor(
+              property.value,
+              property.name,
+              property.property,
+              property.readonly,
+              property.id,
+              property.change
+            );
+            group.appendChild(input)
+          }
+
+          if(property.type == 'select'){
+            let input = this.templates.create.valueSelect(
+              property.value,
+              property.name,
+              property.property,
+              property.readonly,
+              property.options,
+              property.id,
+              property.change
+            );
+            group.appendChild(input)
+          }
+
+          if(property.type == 'file'){
+            let input = this.templates.create.valueFile(
               property.value,
               property.name,
               property.property,

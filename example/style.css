@@ -379,7 +379,7 @@ inspectorjs_value:last-child {
   line-height: 12px;
   max-width: 40%;
   /* width: 40%; */
-  word-break: break-all;
+  /* word-break: break-all; */
   word-wrap: break-word;
   display: inline-block;
   z-index: 9;
@@ -682,6 +682,7 @@ input[type="color"] {
   width: 100%;
   color: var(--color-dark);
   cursor: pointer;
+  word-break: break-all;
 }
 
 .fileChanger input[type=file] {
