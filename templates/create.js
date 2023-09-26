@@ -7,7 +7,7 @@ export default class Create {
    * @returns {void}
    */
   constructor(parent) {
-    this.parent = parent
+    this.parent = parent;
   }
 
   /**
@@ -50,13 +50,13 @@ export default class Create {
     inspectorjs_left_icon.classList.add("inspectorjs_left_icon");
     inspectorjs_left_icon.classList.add(icon);
 
-    button_more.addEventListener('click', (e) => {
+    button_more.addEventListener("click", (e) => {
       let group = e.target.parentElement.parentElement.parentElement;
 
-      if (group.getAttribute('open') == 'true'){
-        group.setAttribute('open', 'false')
+      if (group.getAttribute("open") == "true") {
+        group.setAttribute("open", "false");
       } else {
-        group.setAttribute('open', 'true')
+        group.setAttribute("open", "true");
       }
     });
 
@@ -69,7 +69,7 @@ export default class Create {
 
     for (const key in buttons) {
       const button_prop = buttons[key];
-      const button = this.button(button_prop.icon, button_prop.click)
+      const button = this.button(button_prop.icon, button_prop.click);
       inspectorjs_right.appendChild(button);
     }
 
@@ -79,21 +79,247 @@ export default class Create {
     return title;
   }
 
-  button(icon, click){
-    let button = document.createElement('button');
-    button.classList.add(icon)
+  button(icon, click) {
+    let button = document.createElement("button");
+    button.classList.add(icon);
 
-    if (click){
-      button.addEventListener('click', function(){
-        click(this.parentElement.parentElement.parentElement.getAttribute('id'), this);
-      })
+    if (click) {
+      button.addEventListener("click", function () {
+        click(
+          this.parentElement.parentElement.parentElement.getAttribute("id"),
+          this
+        );
+      });
     }
 
     return button;
   }
 
   hr() {
-    return document.createElement('inspectorjs_hr');
+    return document.createElement("inspectorjs_hr");
   }
 
+  valueString(
+    value,
+    text = "Без определения",
+    property = undefined,
+    readonly = false,
+    id = this.parent.randomString(),
+    change
+  ) {
+    let inspectorjs_value = document.createElement("inspectorjs_value");
+    let letinspectorjs_value_property = document.createElement("div");
+    let inspectorjs_value_value = document.createElement("div");
+    let input = document.createElement("input");
+
+    inspectorjs_value.setAttribute("id", id);
+    letinspectorjs_value_property.classList.add("inspectorjs_value_property");
+    letinspectorjs_value_property.innerHTML = text;
+
+    inspectorjs_value_value.classList.add("inspectorjs_value_value");
+    inspectorjs_value_value.setAttribute("full", "true");
+
+    input.setAttribute("type", "text");
+    readonly ? input.setAttribute("readonly", readonly) : null;
+    input.setAttribute("value", value);
+    input.setAttribute("title", value);
+    input.setAttribute("initial-value", value);
+    property ? input.setAttribute("property", property) : null;
+
+    if (change) {
+      input.addEventListener("input", (e) => {
+        this.parent.debounce(function () {
+          const value = e.target.value;
+          const initialValue = e.target.getAttribute("initial-value");
+
+          if (value != initialValue) {
+            e.target.setAttribute("value", value);
+            e.target.setAttribute("initial-value", value);
+            e.target.setAttribute("title", value);
+            change(value, property, e.target, id, e);
+          }
+        }, 500)();
+      });
+    }
+
+    inspectorjs_value_value.appendChild(input);
+    inspectorjs_value.appendChild(letinspectorjs_value_property);
+    inspectorjs_value.appendChild(inspectorjs_value_value);
+
+    return inspectorjs_value;
+  }
+
+  valueInteger(
+    value,
+    text = "Без определения",
+    property = undefined,
+    readonly = false,
+    min = 0,
+    max = 100,
+    step = 1,
+    id = this.parent.randomString(),
+    change
+  ) {
+    let inspectorjs_value = document.createElement("inspectorjs_value");
+    let letinspectorjs_value_property = document.createElement("div");
+    let inspectorjs_value_value = document.createElement("div");
+    let input = document.createElement("input");
+
+    inspectorjs_value.setAttribute("id", id);
+    letinspectorjs_value_property.classList.add("inspectorjs_value_property");
+    letinspectorjs_value_property.innerHTML = text;
+
+    inspectorjs_value_value.classList.add("inspectorjs_value_value");
+    inspectorjs_value_value.setAttribute("full", "true");
+
+    input.setAttribute("type", "number");
+    input.setAttribute("min", min);
+    input.setAttribute("max", max);
+    input.setAttribute("step", step);
+    readonly ? input.setAttribute("readonly", readonly) : null;
+    input.setAttribute("value", value);
+    input.setAttribute("title", value);
+    input.setAttribute("initial-value", value);
+    property ? input.setAttribute("property", property) : null;
+
+    if (change) {
+      input.addEventListener("input", (e) => {
+        this.parent.debounce(function () {
+          const value = e.target.value;
+          const initialValue = e.target.getAttribute("initial-value");
+
+          if (value != initialValue) {
+            e.target.setAttribute("value", value);
+            e.target.setAttribute("initial-value", value);
+            e.target.setAttribute("title", value);
+            change(parseInt(value), property, e.target, id, e);
+          }
+        }, 500)();
+      });
+    }
+
+    inspectorjs_value_value.appendChild(input);
+    inspectorjs_value.appendChild(letinspectorjs_value_property);
+    inspectorjs_value.appendChild(inspectorjs_value_value);
+
+    return inspectorjs_value;
+  }
+
+  valueFloat(
+    value,
+    text = "Без определения",
+    property = undefined,
+    readonly = false,
+    min = 0,
+    max = 100,
+    step = 1,
+    id = this.parent.randomString(),
+    change
+  ) {
+    let inspectorjs_value = document.createElement("inspectorjs_value");
+    let letinspectorjs_value_property = document.createElement("div");
+    let inspectorjs_value_value = document.createElement("div");
+    let input = document.createElement("input");
+
+    inspectorjs_value.setAttribute("id", id);
+    letinspectorjs_value_property.classList.add("inspectorjs_value_property");
+    letinspectorjs_value_property.innerHTML = text;
+
+    inspectorjs_value_value.classList.add("inspectorjs_value_value");
+    inspectorjs_value_value.setAttribute("full", "true");
+
+    input.setAttribute("type", "number");
+    input.setAttribute("min", min);
+    input.setAttribute("max", max);
+    input.setAttribute("step", step);
+    readonly ? input.setAttribute("readonly", readonly) : null;
+    input.setAttribute("value", value);
+    input.setAttribute("title", value);
+    input.setAttribute("initial-value", value);
+    property ? input.setAttribute("property", property) : null;
+
+    if (change) {
+      input.addEventListener("input", (e) => {
+        this.parent.debounce(function () {
+          const value = e.target.value;
+          const initialValue = e.target.getAttribute("initial-value");
+
+          if (value != initialValue) {
+            const step = e.target.getAttribute("step");
+            const stepLength = step.toString().split(".")[1].length;
+            const stepValue = parseFloat(value).toFixed(stepLength);
+
+            change(parseFloat(stepValue), property, e.target, id, e);
+
+            e.target.setAttribute("value", stepValue);
+            e.target.value = stepValue;
+            e.target.setAttribute("initial-value", stepValue);
+            e.target.setAttribute("title", stepValue);
+          }
+        }, 500)();
+      });
+    }
+
+    inspectorjs_value_value.appendChild(input);
+    inspectorjs_value.appendChild(letinspectorjs_value_property);
+    inspectorjs_value.appendChild(inspectorjs_value_value);
+
+    return inspectorjs_value;
+  }
+
+  valueBoolean(
+    value,
+    text = "Без определения",
+    property = undefined,
+    readonly = false,
+    id = this.parent.randomString(),
+    change
+  ) {
+    let inspectorjs_value = document.createElement("inspectorjs_value");
+    let letinspectorjs_value_property = document.createElement("div");
+    let inspectorjs_value_value = document.createElement("div");
+    let label = document.createElement("label");
+    let input = document.createElement("input");
+    let label1 = document.createElement("label");
+
+    
+
+    inspectorjs_value.setAttribute("id", id);
+    letinspectorjs_value_property.classList.add("inspectorjs_value_property");
+    letinspectorjs_value_property.innerHTML = text;
+
+    inspectorjs_value_value.classList.add("inspectorjs_value_value");
+    inspectorjs_value_value.setAttribute("full", "true");
+
+
+
+    input.setAttribute("type", "checkbox");
+    readonly ? input.setAttribute("readonly", readonly) : null;
+    input.setAttribute("value", value);
+    input.setAttribute("title", value);
+    input.setAttribute("initial-value", value);
+    property ? input.setAttribute("property", property) : null;
+
+    if (change) {
+      input.addEventListener("change", (e) => {
+        this.parent.debounce(function () {
+          const value = e.target.checked;
+          const initialValue = e.target.getAttribute("initial-value");
+
+          if (value != initialValue) {
+            e.target.setAttribute("value", value);
+            e.target.setAttribute("initial-value", value);
+            e.target.setAttribute("title", value);
+            change(value, property, e.target, id, e);
+          }
+        }, 100)();
+      });
+    }
+
+    inspectorjs_value_value.appendChild(input);
+    inspectorjs_value.appendChild(letinspectorjs_value_property);
+    inspectorjs_value.appendChild(inspectorjs_value_value);
+
+    return inspectorjs_value;
+  }
 };

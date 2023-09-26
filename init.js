@@ -58,6 +58,62 @@ export default class InspectorJS {
           group.appendChild(hr)
         } else {
           console.log("Property (" + key2 + "): ", property)
+
+          if(property.type == 'string'){
+            let input = this.templates.create.valueString(
+              property.value,
+              property.name,
+              property.property,
+              property.readonly,
+              property.id,
+              property.change
+            );
+            group.appendChild(input)
+          }
+
+          if(property.type == 'integer'){
+            let input = this.templates.create.valueInteger(
+              property.value,
+              property.name,
+              property.property,
+              property.readonly,
+              property.min,
+              property.max,
+              property.step,
+              property.id,
+              property.change
+            );
+            group.appendChild(input)
+          }
+
+          if(property.type == 'float'){
+            let input = this.templates.create.valueFloat(
+              property.value,
+              property.name,
+              property.property,
+              property.readonly,
+              property.min,
+              property.max,
+              property.step,
+              property.id,
+              property.change
+            );
+            group.appendChild(input)
+          }
+
+          if(property.type == 'boolean'){
+            let input = this.templates.create.valueBoolean(
+              property.value,
+              property.name,
+              property.property,
+              property.readonly,
+              property.id,
+              property.change
+            );
+            group.appendChild(input)
+          }
+
+
         }
         
       }

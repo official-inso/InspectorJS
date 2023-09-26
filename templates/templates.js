@@ -33,14 +33,62 @@ export default class templates {
     n = 30,
     alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
   ) {
-    return "id" +
+    return (
+      "id" +
       Array(n)
         .fill(alphabet)
         .map((x) => x[Math.floor(Math.random() * x.length)])
-        .join("");
+        .join("")
+    );
   }
 
-  
+  debounce(func, wait) {
+    let a = this;
+    return function (...args) {
+      const context = this;
+
+      a.timeout ? clearTimeout(a.timeout) : null;
+
+      a.timeout = setTimeout(() => {
+        func.apply(context, args);
+      }, wait);
+    };
+  }
+
+  delay(func, wait) {
+    let timeout;
+
+    
+
+  }
+
+  throttle(func, delay) {
+    let isThrottled = false;
+    let lastArgs, lastThis;
+
+    return function (...args) {
+      if (isThrottled) {
+        // Если уже есть активный таймер, не делаем ничего.
+        lastArgs = args;
+        lastThis = this;
+        return;
+      }
+
+      func.apply(this, args);
+      isThrottled = true;
+
+      setTimeout(() => {
+        isThrottled = false;
+        if (lastArgs) {
+          // Если были отложенные вызовы, выполним последний.
+          func.apply(lastThis, lastArgs);
+          lastArgs = null;
+          lastThis = null;
+        }
+      }, delay);
+    };
+  }
+
   /**
    * Создает контейнер для навигатора и возвращает его в виде строки с замененными полями
    * @returns Возвращает контейнер для навигатора в виде строки с замененными полями
@@ -50,9 +98,8 @@ export default class templates {
     return f;
   }
 
-  get create(){
+  get create() {
     return this.#create;
   }
-
 };
 
