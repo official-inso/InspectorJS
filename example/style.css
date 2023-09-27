@@ -756,3 +756,29 @@ input[type="color"] {
   display: block;
   text-align: center;
 }
+
+.inspectorjs_property_button{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid rgba(133, 133, 133, 0.173);
+  border-radius: var(--radius-md);
+  font-family: 'gl';
+  padding: 4px 7px;
+  cursor: pointer;
+  font-size: 13px;
+  background-color: transparent;
+  color: var(--color-dark);
+  transition: var(--trans-md);
+  text-decoration: none;
+}
+.inspectorjs_property_button[default=true]:hover {
+  background-color: var(--main-color1-opacity);
+}
+.inspectorjs_property_button * {
+  pointer-events: none;
+}

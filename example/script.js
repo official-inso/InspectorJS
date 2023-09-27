@@ -121,6 +121,18 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(value, property, elem, id, e);
           }, // Функция callback при изменении значения (default: undefined)
         },
+        {
+          id: "rndString17", // ID свойства (default: randomString(32))
+          name: "Кнопка", // Название свойства (default: "Без названия")
+          property: "param99", // Произвольное значение (default: undefined)
+          type: "button", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
+          icon: "icons-info", // Иконка кнопки (default: undefined)
+          // bg: "#AA2F05", // Цвет фона кнопки (default: undefined)
+          text: "Действие", // Значение свойства (default: undefined)
+          click: (property, elem, id, e) => {
+            console.log(property, elem, id, e);
+          }, // Функция callback при изменении значения (default: undefined)
+        },
         "hr", // Разделитель
         {
           id: "rndString8", // ID свойства (default: randomString(32))
@@ -145,34 +157,32 @@ document.addEventListener('DOMContentLoaded', function() {
           value: [
             {
               name: "X", // Название свойства (default: "Без названия")
-              type: "integer", // string | integer | float | color | select (default: "string")
-              id: "param140", // ID свойства (default: randomString(32))
+              type: "float", // string | integer | float | color | select (default: "string")
+              id: "rndString911", // ID свойства (default: randomString(32))
               value: 20, // Значение свойства (default: 0)
               min: 0, // Минимальное значение (default: 0)
               max: 100, // Максимальное значение (default: 100)
-              step: 1, // Шаг изменения (default: 1)
+              step: 10, // Шаг изменения (default: 1)
               readonly: false, // Флаг только для чтения (default: false)
               change: (value, values, property, elem, id, e) => {
                 console.log(value, values, property, elem, id, e);
               }, // Функция callback при изменении значения (default: undefined)
             },
             {
-              name: "Y", // Название свойства (default: "Без названия")
-              type: "float", // string | integer | float | color | select (default: "string")
-              id: "param150", // ID свойства (default: randomString(32))
-              value: 20.55, // Значение свойства (default: 0)
-              min: -100, // Минимальное значение (default: 0)
-              max: 100, // Максимальное значение (default: 100)
-              step: 0.01, // Шаг изменения (default: 1)
-              readonly: false, // Флаг только для чтения (default: false)
-              change: (value, values, property, elem, id, e) => {
-                console.log(value, values, property, elem, id, e);
+              id: "rndString914", // ID свойства (default: randomString(32))
+              name: "Кнопка", // Название свойства (default: "Без названия")
+              type: "button", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
+              // icon: "icons-info", // Иконка кнопки (default: undefined)
+              // bg: "#AA2F05", // Цвет фона кнопки (default: undefined)
+              text: "Действие", // Значение свойства (default: undefined)
+              click: (property, values, elem, id, e) => {
+                console.log(property, values, elem, id, e);
               }, // Функция callback при изменении значения (default: undefined)
             },
             {
               name: "Color", // Название свойства (default: "Без названия")
               type: "color", // string | integer | float | color | select (default: "string")
-              id: "param100", // ID свойства (default: randomString(32))
+              id: "rndString912", // ID свойства (default: randomString(32))
               value: undefined, // Значение свойства (default: 0)
               min: 0, // Минимальное значение (default: 0)
               max: 100, // Максимальное значение (default: 100)
@@ -185,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
             {
               name: "Unit", // Название свойства (default: "Без названия")
               type: "select", // string | integer | float | color | select (default: "string")
-              id: "param120", // ID свойства (default: randomString(32))
+              id: "rndString913", // ID свойства (default: randomString(32))
               value: "px", // Значение свойства (default: undefined)
               options: {
                 px: "px", // Варианты значений

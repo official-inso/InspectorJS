@@ -165,6 +165,19 @@ export default class InspectorJS {
             group.appendChild(input);
           }
 
+          else if (property.type == "button") {
+            let input = this.templates.create.valueButton(
+              property.text,
+              property.icon,
+              property.bg,
+              property.name,
+              property.property,
+              property.id,
+              property.click
+            );
+            group.appendChild(input);
+          }
+
           else if (property.type == "multiString") {
             let input = this.templates.create.valueMultiString(
               property.value,

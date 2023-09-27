@@ -303,7 +303,7 @@ export default class Create {
               const arr = this.returnsGroupValue(
                 e.target.parentElement.parentElement.parentElement
               );
-              change(parseInt(val), arr, property, e.target, id, e);
+              change(parseInt(val), arr, e.target.parentElement.parentElement.parentElement.getAttribute("property"), e.target, id, e);
             } else {
               change(parseInt(val), property, e.target, id, e);
             }
@@ -349,7 +349,12 @@ export default class Create {
     input.setAttribute("_type", "float");
 
     if (step) {
-      const _stepLength = step.toString().split(".")[1].length;
+      let _stepLength;
+      if (step % 1 != 0){
+        _stepLength = step.toString().split(".")[1].length;
+      } else {
+        _stepLength = 0;
+      }
       input.setAttribute("value", parseFloat(value).toFixed(_stepLength));
     } else {
       input.setAttribute("value", step);
@@ -387,7 +392,14 @@ export default class Create {
           if (typeof parseFloat(val) != "number") val = 0;
 
           const step = e.target.getAttribute("step");
-          const stepLength = step.toString().split(".")[1].length;
+
+          let stepLength;
+          if (step % 1 != 0) {
+            stepLength = step.toString().split(".")[1].length;
+          } else {
+            stepLength = 0;
+          }
+
           const stepValue = parseFloat(val).toFixed(stepLength);
 
           if (change) {
@@ -395,7 +407,7 @@ export default class Create {
               const arr = this.returnsGroupValue(
                 e.target.parentElement.parentElement.parentElement
               );
-              change(parseFloat(stepValue), arr, property, e.target, id, e);
+              change(parseFloat(stepValue), arr, e.target.parentElement.parentElement.parentElement.getAttribute("property"), e.target, id, e);
             } else {
               change(parseFloat(stepValue), property, e.target, id, e);
             }
@@ -512,7 +524,6 @@ export default class Create {
     letinspectorjs_value_property.innerHTML = text;
 
     inspectorjs_value_value.classList.add("inspectorjs_value_value");
-    inspectorjs_value_value.setAttribute("full", "true");
 
     input.setAttribute("type", "color");
     readonly ? input.setAttribute("readonly", readonly) : null;
@@ -547,7 +558,7 @@ export default class Create {
               const arr = this.returnsGroupValue(
                 e.target.parentElement.parentElement.parentElement.parentElement
               );
-              change(val, arr, property, e.target, id, e);
+              change(val, arr, e.target.parentElement.parentElement.parentElement.parentElement.getAttribute("property"), e.target, id, e);
             } else {
               change(val, property, e.target, id, e);
             }
@@ -624,7 +635,7 @@ export default class Create {
                 e.target.parentElement.parentElement.parentElement
                   .parentElement
               );
-              change(val, arr, property, e.target, id, e);
+              change(val, arr, e.target.parentElement.parentElement.parentElement.getAttribute("property"), e.target, id, e);
             } else {
               e.target.setAttribute("initial-value", val);
               change(val, property, e.target, id, e);
@@ -750,7 +761,12 @@ export default class Create {
     input_range.setAttribute("step", step);
 
     if (step) {
-      const _stepLength = step.toString().split(".")[1].length;
+      let _stepLength;
+      if (step % 1 != 0) {
+        _stepLength = step.toString().split(".")[1].length;
+      } else {
+        _stepLength = 0;
+      }
       input_range.setAttribute("value", parseFloat(value).toFixed(_stepLength));
       input_number.setAttribute(
         "value",
@@ -790,7 +806,12 @@ export default class Create {
       }
 
       if (step) {
-        const _stepLength = step.toString().split(".")[1].length;
+        let _stepLength;
+        if (step % 1 != 0) {
+          _stepLength = step.toString().split(".")[1].length;
+        } else {
+          _stepLength = 0;
+        }
         input_number.value = parseFloat(val).toFixed(_stepLength);
       } else {
         input_number.value = val;
@@ -819,7 +840,12 @@ export default class Create {
       }
 
       if (step) {
-        const _stepLength = step.toString().split(".")[1].length;
+        let _stepLength;
+        if (step % 1 != 0) {
+          _stepLength = step.toString().split(".")[1].length;
+        } else {
+          _stepLength = 0;
+        }
         input_range.value = parseFloat(val).toFixed(_stepLength);
       } else {
         input_range.value = val;
@@ -828,7 +854,12 @@ export default class Create {
       if (change) {
         this.parent.debounce(function () {
           if (step) {
-            const _stepLength = step.toString().split(".")[1].length;
+            let _stepLength;
+            if (step % 1 != 0) {
+              _stepLength = step.toString().split(".")[1].length;
+            } else {
+              _stepLength = 0;
+            }
             input_number.value = parseFloat(val).toFixed(_stepLength);
           }
 
@@ -846,6 +877,65 @@ export default class Create {
     return inspectorjs_value;
   }
 
+  valueButton(text = "Выполнить", iconClass = undefined, bg = undefined, name = "Без определения", property = undefined, id = this.parent.randomString(), click, groupEvent = false){
+  
+    let inspectorjs_value = document.createElement("inspectorjs_value");
+    let letinspectorjs_value_property = document.createElement("div");
+    let inspectorjs_value_value = document.createElement("div");
+    let button = document.createElement("button");
+    let icon = document.createElement("div");
+    let button_text = document.createElement("div");
+
+    button_text.innerHTML = text;
+
+    if(iconClass) {
+      icon.classList.add("icon");
+      icon.classList.add(iconClass);
+      button.appendChild(icon);
+    }
+    
+    if(bg) {
+      button.style.backgroundColor = bg;
+      button.setAttribute('default', 'false')
+      this.parent.isBrightColor(bg)
+        ? (button.style.color = "#000")
+        : (button.style.color = "#fff");
+    } else {
+      button.setAttribute('default', 'true')
+    }
+
+    button.classList.add("inspectorjs_property_button");
+    button.appendChild(button_text);
+
+    inspectorjs_value.setAttribute("id", id);
+    letinspectorjs_value_property.classList.add("inspectorjs_value_property");
+    letinspectorjs_value_property.innerHTML = name;
+
+    inspectorjs_value_value.classList.add("inspectorjs_value_value");
+
+    inspectorjs_value_value.appendChild(button)
+    
+    inspectorjs_value.appendChild(letinspectorjs_value_property);
+    inspectorjs_value.appendChild(inspectorjs_value_value);
+
+    if(click) {
+      button.addEventListener('click', (e) => {
+        if (groupEvent){
+          const arr = this.returnsGroupValue(
+            e.target.parentElement.parentElement.parentElement
+              .parentElement
+          );
+          click(e.target.parentElement.parentElement.parentElement.getAttribute("property"), arr, e.target, id, e)
+        } else {
+          click(property, e.target, id, e)
+        }
+      })
+    }    
+
+    return inspectorjs_value;
+
+  }
+
   valueValues(
     value,
     name = "Без имени",
@@ -859,6 +949,7 @@ export default class Create {
     let inspectorjs_value_value = document.createElement("div");
 
     inspectorjs_value.setAttribute("id", id);
+    
     inspectorjs_value_property.classList.add("inspectorjs_value_property");
     inspectorjs_value_property.innerHTML = name;
 
@@ -869,6 +960,7 @@ export default class Create {
       else group = "auto";
     }
 
+    inspectorjs_value_value.setAttribute("property", property);
     inspectorjs_value_value.classList.add("inspectorjs_value_value");
     inspectorjs_value_value.setAttribute("group", group);
 
@@ -934,6 +1026,17 @@ export default class Create {
         data.options,
         data.id,
         data.change,
+        true,
+      );
+    } else if (data.type == "button") {
+      out = this.valueButton(
+        data.text,
+        data.icon,
+        data.bg,
+        data.name,
+        data.id,
+        data.id,
+        data.click,
         true,
       );
     } else {
