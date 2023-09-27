@@ -153,7 +153,7 @@ div#content {
   border: 1px solid rgba(133, 133, 133, 0.173);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
-  max-width: 350px;
+  max-width: 450px;
   width: 100%;
   background-color: var(--bg1);
 }
@@ -420,6 +420,10 @@ inspectorjs_value:last-child {
   grid-template-columns: repeat(2, 1fr);
   gap: 5px;
   padding-left: 10px;
+}
+
+.inspectorjs_value_value[group] .inspectorjs_value_value[group]{
+  padding-left: 0px;
 }
 
 .inspectorjs_value_value[group="4"] {
@@ -720,7 +724,6 @@ input[type="color"] {
   width: 100% !important;
   max-width: 100% !important;
   min-width: 100% !important;
-  display: block;
 }
 
 .inspectorjs_value_value[group]>inspectorjs_value>.inspectorjs_value_value>input {
@@ -789,4 +792,7 @@ input[type="color"] {
 }
 .inspectorjs_value_value[group]>inspectorjs_value .inspectorjs_property_button * {
   word-break: normal;
+}
+.inspectorjs_value_value[group] .inspectorjs_property_button {
+  width: 100%;
 }

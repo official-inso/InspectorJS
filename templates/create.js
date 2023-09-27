@@ -972,7 +972,10 @@ export default class Create {
       }
     }
 
-    inspectorjs_value.appendChild(inspectorjs_value_property);
+    if (name != ""){
+      inspectorjs_value.appendChild(inspectorjs_value_property);
+    }
+    
     inspectorjs_value.appendChild(inspectorjs_value_value);
 
     return inspectorjs_value;
@@ -1038,6 +1041,15 @@ export default class Create {
         data.id,
         data.click,
         true,
+      );
+    } else if (data.type == "values") {
+      out = this.valueValues(
+        data.value,
+        "",
+        data.property,
+        data.group,
+        data.id,
+        data.change
       );
     } else {
       out = this.valueString(
