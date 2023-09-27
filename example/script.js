@@ -141,10 +141,36 @@ document.addEventListener('DOMContentLoaded', function() {
           name: "Множественные значения", // Название свойства (default: "Без названия")
           property: "param9", // Произвольное значение (default: undefined)
           type: "values", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
-          group: "auto", // 1 | 2 | 3 | 4 | auto (default: "auto")
+          group: "2", // 1 | 2 | 3 | 4 | auto (default: "auto")
           value: [
             {
-              name: "Size", // Название свойства (default: "Без названия")
+              name: "X", // Название свойства (default: "Без названия")
+              type: "integer", // string | integer | float | color | select (default: "string")
+              id: "param140", // ID свойства (default: randomString(32))
+              value: 20, // Значение свойства (default: 0)
+              min: 0, // Минимальное значение (default: 0)
+              max: 100, // Максимальное значение (default: 100)
+              step: 1, // Шаг изменения (default: 1)
+              readonly: false, // Флаг только для чтения (default: false)
+              change: (value, values, property, elem, id, e) => {
+                console.log(value, values, property, elem, id, e);
+              }, // Функция callback при изменении значения (default: undefined)
+            },
+            {
+              name: "Y", // Название свойства (default: "Без названия")
+              type: "float", // string | integer | float | color | select (default: "string")
+              id: "param150", // ID свойства (default: randomString(32))
+              value: 20.55, // Значение свойства (default: 0)
+              min: -100, // Минимальное значение (default: 0)
+              max: 100, // Максимальное значение (default: 100)
+              step: 0.01, // Шаг изменения (default: 1)
+              readonly: false, // Флаг только для чтения (default: false)
+              change: (value, values, property, elem, id, e) => {
+                console.log(value, values, property, elem, id, e);
+              }, // Функция callback при изменении значения (default: undefined)
+            },
+            {
+              name: "Color", // Название свойства (default: "Без названия")
               type: "color", // string | integer | float | color | select (default: "string")
               id: "param100", // ID свойства (default: randomString(32))
               value: undefined, // Значение свойства (default: 0)

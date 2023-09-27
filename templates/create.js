@@ -126,6 +126,7 @@ export default class Create {
     input.setAttribute("value", value);
     input.setAttribute("title", value);
     input.setAttribute("initial-value", value);
+    input.setAttribute("_type", "string");
     property ? input.setAttribute("property", property) : null;
 
     if (change) {
@@ -237,6 +238,7 @@ export default class Create {
     inspectorjs_value_value.setAttribute("full", "true");
 
     input.setAttribute("type", "number");
+    input.setAttribute("_type", "integer");
 
     readonly ? input.setAttribute("readonly", readonly) : null;
 
@@ -343,6 +345,8 @@ export default class Create {
     inspectorjs_value_value.setAttribute("full", "true");
 
     input.setAttribute("type", "number");
+
+    input.setAttribute("_type", "float");
 
     if (step) {
       const _stepLength = step.toString().split(".")[1].length;
@@ -516,6 +520,9 @@ export default class Create {
     label.setAttribute("title", value);
     span.setAttribute("title", value);
     input.setAttribute("initial-value", value);
+
+    input.setAttribute("_type", "string");
+
     property ? input.setAttribute("property", property) : null;
 
     input.addEventListener("input", (e) => {
@@ -586,6 +593,8 @@ export default class Create {
     readonly ? select.setAttribute("readonly", readonly) : null;
     select.setAttribute("initial-value", value);
     property ? select.setAttribute("property", property) : null;
+
+    select.setAttribute("_type", "string");
 
     for (const key in options) {
       const option = options[key];
@@ -953,7 +962,7 @@ export default class Create {
         if (valu.getAttribute("property")) {
           arr.push({
             id: valu.getAttribute("property"),
-            value: valu.value,
+            value: this.formatToType(valu.value, valu.getAttribute("_type")),
           });
         }
       }
@@ -965,12 +974,22 @@ export default class Create {
         if (valu.getAttribute("property")) {
           arr.push({
             id: valu.getAttribute("property"),
-            value: valu.value,
+            value: this.formatToType(valu.value, valu.getAttribute("_type")),
           });
         }
       }
     }
 
     return arr;
+  }
+
+  formatToType(value, type) {
+    if (type == "integer") {
+      return parseInt(value);
+    } else if (type == "float") {
+      return parseFloat(value);
+    } else {
+      return value;
+    }
   }
 };
