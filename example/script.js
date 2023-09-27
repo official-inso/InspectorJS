@@ -140,8 +140,8 @@ document.addEventListener('DOMContentLoaded', function() {
           property: "param8", // Произвольное значение (default: undefined)
           type: "slider", // multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
           value: 0, // Значение свойства (default: 0)
-          step: 0.01, // Шаг изменения (default: 1)
-          min: -100, // Минимальное значение (default: 0)
+          step: 0.1, // Шаг изменения (default: 1)
+          min: -250, // Минимальное значение (default: 0)
           max: 100, // Максимальное значение (default: 100)
           readonly: false, // Флаг только для чтения (default: false)
           change: (value, property, elem, id, e) => {

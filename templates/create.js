@@ -778,6 +778,32 @@ export default class Create {
       input_number.setAttribute("value", step);
     }
 
+    if(min && max) {
+      input_range.addEventListener('dblclick', (e) => {
+        let average = (min + max) / 2;
+
+        if (step) {
+          let _stepLength;
+          if (step % 1 != 0) {
+            _stepLength = step.toString().split(".")[1].length;
+          } else {
+            _stepLength = 0;
+          }
+          input_range.value = parseFloat(average).toFixed(_stepLength);
+          input_number.value = parseFloat(average).toFixed(_stepLength);
+        } else {
+          input_range.value = average;
+          input_number.value = average;
+        }
+
+        if (change) {
+          this.parent.debounce(function () {
+            change(average, property, e.target, id, e);
+          }, 500)();
+        }
+      })
+    }
+
     readonly ? input_range.setAttribute("readonly", readonly) : null;
     input_range.setAttribute("initial-value", value);
     property ? input_range.setAttribute("property", property) : null;

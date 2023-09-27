@@ -486,6 +486,9 @@ inspectorjs_value:focus-within:after {
   padding: 5px 0px;
 }
 
+.inspectorjs_value_value>input[type=range][readonly=true]{
+  pointer-events: none;
+}
 
 
 inspectorjs input[type=number]::-webkit-inner-spin-button {
