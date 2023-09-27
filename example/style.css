@@ -781,4 +781,12 @@ input[type="color"] {
 }
 .inspectorjs_property_button * {
   pointer-events: none;
+  word-break: break-word;
+  text-align: left;
+}
+.inspectorjs_property_button .icon{
+  text-align: center;
+}
+.inspectorjs_value_value[group]>inspectorjs_value .inspectorjs_property_button * {
+  word-break: normal;
 }
