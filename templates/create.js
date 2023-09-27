@@ -628,6 +628,7 @@ export default class Create {
 
         if (val != initialValue) {
           
+          select.setAttribute("initial-value", val);
 
           if (change) {
             if (groupEvent) {
