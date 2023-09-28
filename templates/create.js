@@ -173,6 +173,8 @@ export default class Create {
 
     inspectorjs_value_value.classList.add("inspectorjs_value_value");
 
+    centralMarker.setAttribute('tabindex', "0")
+
     centralMarkerAxisOx.appendChild(centralMarkerAxisOxBg);
     centralMarkerAxisOy.appendChild(centralMarkerAxisOyBg);
     centralMarkerAxis.appendChild(centralMarkerAxisOx);
@@ -243,6 +245,78 @@ export default class Create {
         }
       }      
     });
+
+    centralMarker.addEventListener('keydown', (e) => {
+      if (e.keyCode == 37 || e.which == 37 || e.key == 'ArrowLeft' || e.key == 'a') {
+        let x = parseFloat(centralMarkerPoint.style.left);
+
+        if(e.ctrlKey)  {
+          x -= 10;
+        }
+        else if(e.shiftKey)  {
+          x -= 0.1;
+        }
+        else {
+          x -= 1;
+        }
+        if (x < 0) x = 0;
+        centralMarkerPoint.style.left = x + 'px';
+      }
+
+      if (e.keyCode == 38 || e.which == 38 || e.key == 'ArrowUp' || e.key == 'w') {
+        let y = parseFloat(centralMarkerPoint.style.top);
+        if(e.ctrlKey)  {
+          y -= 10;
+        }
+        else if(e.shiftKey)  {
+          y -= 0.1;
+        }
+        else {
+          y -= 1;
+        }
+        if (y < 0) y = 0;
+        centralMarkerPoint.style.top = y + 'px';
+      }
+
+      if (e.keyCode == 39 || e.which == 39 || e.key == 'ArrowRight' || e.key == 'd') {
+        let x = parseFloat(centralMarkerPoint.style.left);
+        if(e.ctrlKey)  {
+          x += 10;
+        }
+        else if(e.shiftKey)  {
+          x += 0.1;
+        }
+        else {
+          x += 1;
+        }
+        if (x > centralMarkerAxis.offsetWidth) x = centralMarkerAxis.offsetWidth;
+        centralMarkerPoint.style.left = x + 'px';
+      }
+
+      if (e.keyCode == 40 || e.which == 40 || e.key == 'ArrowDown' || e.key == 's') {
+        let y = parseFloat(centralMarkerPoint.style.top);
+        if (e.ctrlKey) {
+          y += 10;
+        }
+        else if (e.shiftKey) {
+          y += 0.1;
+        }
+        else {
+          y += 1;
+        }
+        if (y > centralMarkerAxis.offsetHeight) y = centralMarkerAxis.offsetHeight;
+        centralMarkerPoint.style.top = y + 'px';
+      }
+
+      let _x = parseFloat(centralMarkerPoint.style.left) / centralMarkerAxis.offsetWidth * 100;
+      let _y = parseFloat(centralMarkerPoint.style.top) / centralMarkerAxis.offsetHeight * 100;
+
+      if (change) {
+        this.parent.debounce(function () {
+          change([_x, _y], property, e.target, id, e);
+        }, 500)();
+      }
+    })
 
     document.addEventListener('mouseup', (e) => {
       if (statrtMove) {
