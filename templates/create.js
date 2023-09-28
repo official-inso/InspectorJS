@@ -172,7 +172,6 @@ export default class Create {
     letinspectorjs_value_property.innerHTML = name;
 
     inspectorjs_value_value.classList.add("inspectorjs_value_value");
-    inspectorjs_value_value.setAttribute("full", "true");
 
     centralMarkerAxisOx.appendChild(centralMarkerAxisOxBg);
     centralMarkerAxisOy.appendChild(centralMarkerAxisOyBg);
