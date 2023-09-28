@@ -50,10 +50,21 @@ inspector.setValue([
   ], // Кнопки группы (default: [])
   properties: [
     {
+      id: "rndString100", // ID свойства (default: randomString(32))
+      name: "Центральный маркер точки", // Название свойства (default: "Без названия")
+      property: "param100", // Произвольное значение (default: undefined)
+      type: "centerMarker", // centerMarker | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+      value: [50, 50], // Значение свойства (default: [50, 50])
+      readonly: false, // Флаг только для чтения (default: false)
+      change: (value, property, elem, id, e) => {
+        console.log(value, property, elem, id, e);
+      }, // Функция callback при изменении значения (default: undefined)
+    },
+    {
       id: "rndString1", // ID свойства (default: randomString(32))
       name: "Строковое значение", // Название свойства (default: "Без названия")
       property: "param1", // Произвольное значение (default: undefined)
-      type: "string", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
+      type: "string", // centerMarker | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
       value: "Hello world!", // Значение свойства (default: "")
       readonly: false, // Флаг только для чтения (default: false)
       change: (value, property, elem, id, e) => {
@@ -64,7 +75,7 @@ inspector.setValue([
       id: "rndString1", // ID свойства (default: randomString(32))
       name: "Мультистроковое значение", // Название свойства (default: "Без названия")
       property: "param1", // Произвольное значение (default: undefined)
-      type: "multiString", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
+      type: "multiString", // centerMarker | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
       value: "Hello world!", // Значение свойства (default: "")
       readonly: false, // Флаг только для чтения (default: false)
       change: (value, property, elem, id, e) => {
@@ -75,7 +86,7 @@ inspector.setValue([
       id: "rndString2", // ID свойства (default: randomString(32))
       name: "Целочисленное значение", // Название свойства (default: "Без названия")
       property: "param2", // Произвольное значение (default: undefined)
-      type: "integer", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
+      type: "integer", // centerMarker | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
       value: 50, // Значение свойства (default: 0)
       readonly: false, // Флаг только для чтения (default: false)
       min: -50, // Минимальное значение (default: 0)
@@ -89,7 +100,7 @@ inspector.setValue([
       id: "rndString3", // ID свойства (default: randomString(32))
       name: "Дробное значение", // Название свойства (default: "Без названия")
       property: "param3", // Произвольное значение (default: undefined)
-      type: "float", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
+      type: "float", // centerMarker | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
       value: 1, // Значение свойства (default: 0)
       readonly: false, // Флаг только для чтения (default: false)
       min: 0, // Минимальное значение (default: undefined)
@@ -103,7 +114,7 @@ inspector.setValue([
       id: "rndString4", // ID свойства (default: randomString(32))
       name: "Выпадающий список", // Название свойства (default: "Без названия")
       property: "param4", // Произвольное значение (default: undefined)
-      type: "select", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
+      type: "select", // centerMarker | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
       value: "key2", // Значение свойства (default: undefined)
       readonly: false, // Флаг только для чтения (default: false)
       options: {
@@ -120,7 +131,7 @@ inspector.setValue([
       id: "rndString5", // ID свойства (default: randomString(32))
       name: "Выбор файла", // Название свойства (default: "Без названия")
       property: "param5", // Произвольное значение (default: undefined)
-      type: "file", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
+      type: "file", // centerMarker | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
       value: "image.png", // Значение свойства (default: undefined)
       readonly: false, // Флаг только для чтения (default: false)
       change: (value, property, elem, id, e) => {
@@ -131,7 +142,7 @@ inspector.setValue([
       id: "rndString6", // ID свойства (default: randomString(32))
       name: "Логическое значение", // Название свойства (default: "Без названия")
       property: "param6", // Произвольное значение (default: undefined)
-      type: "boolean", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
+      type: "boolean", // centerMarker | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
       value: true, // Значение свойства (default: false)
       readonly: false, // Флаг только для чтения (default: false)
       change: (value, property, elem, id, e) => {
@@ -142,7 +153,7 @@ inspector.setValue([
       id: "rndString7", // ID свойства (default: randomString(32))
       name: "Выбор цвета", // Название свойства (default: "Без названия")
       property: "param7", // Произвольное значение (default: undefined)
-      type: "color", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
+      type: "color", // centerMarker | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
       value: "#000000", // Значение свойства (default: undefined)
       readonly: false, // Флаг только для чтения (default: false)
       change: (value, property, elem, id, e) => {
@@ -153,7 +164,7 @@ inspector.setValue([
       id: "rndString17", // ID свойства (default: randomString(32))
       name: "Кнопка", // Название свойства (default: "Без названия")
       property: "param99", // Произвольное значение (default: undefined)
-      type: "button", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
+      type: "button", // centerMarker | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
       icon: "icons-info", // Иконка кнопки (default: undefined)
       // bg: "#AA2F05", // Цвет фона кнопки (default: undefined)
       text: "Действие", // Значение свойства (default: undefined)
@@ -166,7 +177,7 @@ inspector.setValue([
       id: "rndString8", // ID свойства (default: randomString(32))
       name: "Ползунок", // Название свойства (default: "Без названия")
       property: "param8", // Произвольное значение (default: undefined)
-      type: "slider", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
+      type: "slider", // centerMarker | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
       value: 0, // Значение свойства (default: 0)
       step: 0.01, // Шаг изменения (default: 1)
       min: -100, // Минимальное значение (default: 0)
@@ -180,7 +191,7 @@ inspector.setValue([
       id: "rndString9", // ID свойства (default: randomString(32))
       name: "Множественные значения", // Название свойства (default: "Без названия")
       property: "param9", // Произвольное значение (default: undefined)
-      type: "values", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
+      type: "values", // centerMarker | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
       group: "2", // 1 | 2 | 3 | 4 | auto (default: "auto")
       value: [
         {
@@ -199,7 +210,7 @@ inspector.setValue([
         {
           id: "rndString914", // ID свойства (default: randomString(32))
           name: "Кнопка", // Название свойства (default: "Без названия")
-          type: "button", // multiString | values | string | integer | float | boolean | color | file | select | slider (default: "string")
+          type: "button", // centerMarker | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
           // icon: "icons-info", // Иконка кнопки (default: undefined)
           // bg: "#AA2F05", // Цвет фона кнопки (default: undefined)
           text: "Действие", // Значение свойства (default: undefined)

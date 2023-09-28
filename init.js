@@ -189,6 +189,18 @@ export default class InspectorJS {
             );
             group.appendChild(input);
           }
+
+          else if (property.type == "centerMarker") {
+            let input = this.templates.create.centerMarker(
+              property.value,
+              property.name,
+              property.property,
+              property.readonly,
+              property.id,
+              property.change
+            );
+            group.appendChild(input);
+          }
           
           else {
             let input = this.templates.create.valueString(

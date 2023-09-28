@@ -152,6 +152,124 @@ export default class Create {
     return inspectorjs_value;
   }
 
+  centerMarker(value = [50, 50], name = "Без определения", property = undefined, readonly = false, id = this.parent.randomString(), change){
+
+    let inspectorjs_value = document.createElement("inspectorjs_value");
+    let letinspectorjs_value_property = document.createElement("div");
+    let centralMarker = document.createElement("centralMarker");
+    let centralMarkerAxis = document.createElement("centralMarkerAxis");
+    let centralMarkerAxisOx = document.createElement("centralMarkerAxisOx");
+    let centralMarkerAxisOxBg = document.createElement("centralMarkerAxisOxBg");
+    let centralMarkerAxisOy = document.createElement("centralMarkerAxisOy");
+    let centralMarkerAxisOyBg = document.createElement("centralMarkerAxisOyBg");
+    let centralMarkerAxisPoint = document.createElement("centralMarkerAxisPoint");
+    let centralMarkerPoint = document.createElement("centralMarkerPoint");
+    let centralMarkerPointBg = document.createElement("centralMarkerPointBg");
+    let inspectorjs_value_value = document.createElement("div");
+
+    inspectorjs_value.setAttribute("id", id);
+    letinspectorjs_value_property.classList.add("inspectorjs_value_property");
+    letinspectorjs_value_property.innerHTML = name;
+
+    inspectorjs_value_value.classList.add("inspectorjs_value_value");
+    inspectorjs_value_value.setAttribute("full", "true");
+
+    centralMarkerAxisOx.appendChild(centralMarkerAxisOxBg);
+    centralMarkerAxisOy.appendChild(centralMarkerAxisOyBg);
+    centralMarkerAxis.appendChild(centralMarkerAxisOx);
+    centralMarkerAxis.appendChild(centralMarkerAxisOy);
+    centralMarkerAxis.appendChild(centralMarkerAxisPoint);
+    centralMarker.appendChild(centralMarkerAxis);
+    centralMarkerPoint.appendChild(centralMarkerPointBg);
+    centralMarker.appendChild(centralMarkerPoint);
+    inspectorjs_value_value.appendChild(centralMarker);
+    inspectorjs_value.appendChild(letinspectorjs_value_property);
+    inspectorjs_value.appendChild(inspectorjs_value_value);
+
+    centralMarkerPoint.style.left = value[0] + '%';
+    centralMarkerPoint.style.top = value[1] + '%';
+
+    let statrtMove = false;
+    let ev = undefined;
+
+    centralMarkerAxis.addEventListener('mousedown', (e) => {
+      const rect = e.target.getBoundingClientRect();
+      let x = e.clientX - rect.left;
+      let y = e.clientY - rect.top;
+      ev = e;
+
+      statrtMove = true;
+
+      if (x < 0) x = 0;
+      if (y < 0) y = 0;
+      if (x > rect.width) x = rect.width;
+      if (y > rect.height) y = rect.height;
+
+      centralMarkerPoint.style.left = x + 'px';
+      centralMarkerPoint.style.top = y + 'px';
+
+      let _x = x / centralMarkerAxis.offsetWidth * 100;
+      let _y = y / centralMarkerAxis.offsetHeight * 100;
+
+      centralMarker.style.cursor = 'none';
+
+      if(change) {
+        this.parent.debounce(function () {
+          change([_x, _y], property, e.target, id, e);
+        }, 500)();
+      }
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if(statrtMove) {
+        const rect = ev.target.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+        let y = e.clientY - rect.top;
+
+        if(x < 0) x = 0;
+        if(y < 0) y = 0;
+        if(x > rect.width) x = rect.width;
+        if(y > rect.height) y = rect.height;
+
+        centralMarkerPoint.style.left = x + 'px';
+        centralMarkerPoint.style.top = y + 'px';
+
+        let _x = x / centralMarkerAxis.offsetWidth * 100;
+        let _y = y / centralMarkerAxis.offsetHeight * 100;
+
+        if (change) {
+          this.parent.debounce(function () {
+            change([_x, _y], property, e.target, id, e);
+          }, 500)();
+        }
+      }      
+    });
+
+    document.addEventListener('mouseup', (e) => {
+      if (statrtMove) {
+        statrtMove = false;
+        centralMarker.style.cursor = 'default';
+      }
+    });
+
+    centralMarker.addEventListener('dblclick', (e) => {
+      const rect = e.target.getBoundingClientRect();
+
+      centralMarkerPoint.style.left = rect.width / 2 + 'px';
+      centralMarkerPoint.style.top = rect.height / 2 + 'px';
+
+      if (change) {
+        this.parent.debounce(function () {
+          change([50, 50], property, e.target, id, e);
+        }, 500)();
+      }
+    })
+
+
+
+    return inspectorjs_value;
+  }
+
   valueMultiString(
     value,
     text = "Без определения",

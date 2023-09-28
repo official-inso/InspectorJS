@@ -22,6 +22,17 @@ document.addEventListener('DOMContentLoaded', function() {
       ], // Кнопки группы (default: [])
       properties: [
         {
+          id: "rndString100", // ID свойства (default: randomString(32))
+          name: "Центральный маркер точки", // Название свойства (default: "Без названия")
+          property: "param100", // Произвольное значение (default: undefined)
+          type: "centerMarker", // centerMarker | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+          value: [50, 50], // Значение свойства (default: [50, 50])
+          readonly: false, // Флаг только для чтения (default: false)
+          change: (value, property, elem, id, e) => {
+            console.log(value, property, elem, id, e);
+          }, // Функция callback при изменении значения (default: undefined)
+        },
+        {
           id: "rndString1", // ID свойства (default: randomString(32))
           name: "Строковое значение", // Название свойства (default: "Без названия")
           property: "param1", // Произвольное значение (default: undefined)
