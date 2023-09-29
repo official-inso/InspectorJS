@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
           name: "Выравнивание по оси Х", // Название свойства (default: "Без названия")
           property: "param1", // Произвольное значение (default: undefined)
           type: "alignX", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
-          value: "left", // Значение свойства (default: "")
+          value: "top", // Значение свойства (default: "")
           readonly: false, // Флаг только для чтения (default: false)
           change: (value, property, elem, id, e) => {
             console.log(value, property, elem, id, e);

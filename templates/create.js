@@ -201,55 +201,19 @@ export default class Create {
     let statrtMove = false;
     let ev = undefined;
 
-    centralMarkerAxis.addEventListener("mousedown", (e) => {
-      const rect = e.target.getBoundingClientRect();
-      let x = e.clientX - rect.left;
-      let y = e.clientY - rect.top;
-      ev = e;
-
-      statrtMove = true;
-
-      if (x < 0) x = 0;
-      if (y < 0) y = 0;
-      if (x > rect.width) x = rect.width;
-      if (y > rect.height) y = rect.height;
-
-      centralMarkerPoint.style.left = x + "px";
-      centralMarkerPoint.style.top = y + "px";
-
-      let _x = (x / centralMarkerAxis.offsetWidth) * 100;
-      let _y = (y / centralMarkerAxis.offsetHeight) * 100;
-
-      centralMarker.style.cursor = "none";
-
-      if (change) {
-        this.parent.debounce(function () {
-          change([_x, _y], property, e.target, id, e);
-        }, 500)();
-      }
-    });
-
-    document.addEventListener("mousemove", (e) => {
-      if (statrtMove) {
-        const rect = ev.target.getBoundingClientRect();
+    if(!readonly){
+      centralMarkerAxis.addEventListener("mousedown", (e) => {
+        const rect = e.target.getBoundingClientRect();
         let x = e.clientX - rect.left;
         let y = e.clientY - rect.top;
+        ev = e;
+
+        statrtMove = true;
 
         if (x < 0) x = 0;
         if (y < 0) y = 0;
         if (x > rect.width) x = rect.width;
         if (y > rect.height) y = rect.height;
-
-        // Примагничивание к центру если близко
-        if(!e.ctrlKey){
-          if (x > rect.width / 2 - 5 && x < rect.width / 2 + 5) {
-            x = rect.width / 2;
-          }
-          if (y > rect.height / 2 - 5 && y < rect.height / 2 + 5) {
-            y = rect.height / 2;
-          }
-        }
-        
 
         centralMarkerPoint.style.left = x + "px";
         centralMarkerPoint.style.top = y + "px";
@@ -257,125 +221,162 @@ export default class Create {
         let _x = (x / centralMarkerAxis.offsetWidth) * 100;
         let _y = (y / centralMarkerAxis.offsetHeight) * 100;
 
+        centralMarker.style.cursor = "none";
+
         if (change) {
           this.parent.debounce(function () {
             change([_x, _y], property, e.target, id, e);
           }, 500)();
         }
-      }
-    });
+      });
 
-    centralMarker.addEventListener("keydown", (e) => {
-      if (
-        e.keyCode == 37 ||
-        e.which == 37 ||
-        e.key == "ArrowLeft" ||
-        e.key == "a"
-      ) {
-        let x = parseFloat(centralMarkerPoint.style.left);
+      document.addEventListener("mousemove", (e) => {
+        if (statrtMove) {
+          const rect = ev.target.getBoundingClientRect();
+          let x = e.clientX - rect.left;
+          let y = e.clientY - rect.top;
 
-        if (e.ctrlKey) {
-          x -= 10;
-        } else if (e.shiftKey) {
-          x -= 0.1;
-        } else {
-          x -= 1;
+          if (x < 0) x = 0;
+          if (y < 0) y = 0;
+          if (x > rect.width) x = rect.width;
+          if (y > rect.height) y = rect.height;
+
+          // Примагничивание к центру если близко
+          if (!e.ctrlKey) {
+            if (x > rect.width / 2 - 5 && x < rect.width / 2 + 5) {
+              x = rect.width / 2;
+            }
+            if (y > rect.height / 2 - 5 && y < rect.height / 2 + 5) {
+              y = rect.height / 2;
+            }
+          }
+
+          centralMarkerPoint.style.left = x + "px";
+          centralMarkerPoint.style.top = y + "px";
+
+          let _x = (x / centralMarkerAxis.offsetWidth) * 100;
+          let _y = (y / centralMarkerAxis.offsetHeight) * 100;
+
+          if (change) {
+            this.parent.debounce(function () {
+              change([_x, _y], property, e.target, id, e);
+            }, 500)();
+          }
         }
-        if (x < 0) x = 0;
-        centralMarkerPoint.style.left = x + "px";
-      }
+      });
 
-      if (
-        e.keyCode == 38 ||
-        e.which == 38 ||
-        e.key == "ArrowUp" ||
-        e.key == "w"
-      ) {
-        let y = parseFloat(centralMarkerPoint.style.top);
-        if (e.ctrlKey) {
-          y -= 10;
-        } else if (e.shiftKey) {
-          y -= 0.1;
-        } else {
-          y -= 1;
+      centralMarker.addEventListener("keydown", (e) => {
+        if (
+          e.keyCode == 37 ||
+          e.which == 37 ||
+          e.key == "ArrowLeft" ||
+          e.key == "a"
+        ) {
+          let x = parseFloat(centralMarkerPoint.style.left);
+
+          if (e.ctrlKey) {
+            x -= 10;
+          } else if (e.shiftKey) {
+            x -= 0.1;
+          } else {
+            x -= 1;
+          }
+          if (x < 0) x = 0;
+          centralMarkerPoint.style.left = x + "px";
         }
-        if (y < 0) y = 0;
-        centralMarkerPoint.style.top = y + "px";
-      }
 
-      if (
-        e.keyCode == 39 ||
-        e.which == 39 ||
-        e.key == "ArrowRight" ||
-        e.key == "d"
-      ) {
-        let x = parseFloat(centralMarkerPoint.style.left);
-        if (e.ctrlKey) {
-          x += 10;
-        } else if (e.shiftKey) {
-          x += 0.1;
-        } else {
-          x += 1;
+        if (
+          e.keyCode == 38 ||
+          e.which == 38 ||
+          e.key == "ArrowUp" ||
+          e.key == "w"
+        ) {
+          let y = parseFloat(centralMarkerPoint.style.top);
+          if (e.ctrlKey) {
+            y -= 10;
+          } else if (e.shiftKey) {
+            y -= 0.1;
+          } else {
+            y -= 1;
+          }
+          if (y < 0) y = 0;
+          centralMarkerPoint.style.top = y + "px";
         }
-        if (x > centralMarkerAxis.offsetWidth)
-          x = centralMarkerAxis.offsetWidth;
-        centralMarkerPoint.style.left = x + "px";
-      }
 
-      if (
-        e.keyCode == 40 ||
-        e.which == 40 ||
-        e.key == "ArrowDown" ||
-        e.key == "s"
-      ) {
-        let y = parseFloat(centralMarkerPoint.style.top);
-        if (e.ctrlKey) {
-          y += 10;
-        } else if (e.shiftKey) {
-          y += 0.1;
-        } else {
-          y += 1;
+        if (
+          e.keyCode == 39 ||
+          e.which == 39 ||
+          e.key == "ArrowRight" ||
+          e.key == "d"
+        ) {
+          let x = parseFloat(centralMarkerPoint.style.left);
+          if (e.ctrlKey) {
+            x += 10;
+          } else if (e.shiftKey) {
+            x += 0.1;
+          } else {
+            x += 1;
+          }
+          if (x > centralMarkerAxis.offsetWidth)
+            x = centralMarkerAxis.offsetWidth;
+          centralMarkerPoint.style.left = x + "px";
         }
-        if (y > centralMarkerAxis.offsetHeight)
-          y = centralMarkerAxis.offsetHeight;
-        centralMarkerPoint.style.top = y + "px";
-      }
 
-      let _x =
-        (parseFloat(centralMarkerPoint.style.left) /
-          centralMarkerAxis.offsetWidth) *
-        100;
-      let _y =
-        (parseFloat(centralMarkerPoint.style.top) /
-          centralMarkerAxis.offsetHeight) *
-        100;
+        if (
+          e.keyCode == 40 ||
+          e.which == 40 ||
+          e.key == "ArrowDown" ||
+          e.key == "s"
+        ) {
+          let y = parseFloat(centralMarkerPoint.style.top);
+          if (e.ctrlKey) {
+            y += 10;
+          } else if (e.shiftKey) {
+            y += 0.1;
+          } else {
+            y += 1;
+          }
+          if (y > centralMarkerAxis.offsetHeight)
+            y = centralMarkerAxis.offsetHeight;
+          centralMarkerPoint.style.top = y + "px";
+        }
 
-      if (change) {
-        this.parent.debounce(function () {
-          change([_x, _y], property, e.target, id, e);
-        }, 500)();
-      }
-    });
+        let _x =
+          (parseFloat(centralMarkerPoint.style.left) /
+            centralMarkerAxis.offsetWidth) *
+          100;
+        let _y =
+          (parseFloat(centralMarkerPoint.style.top) /
+            centralMarkerAxis.offsetHeight) *
+          100;
 
-    document.addEventListener("mouseup", (e) => {
-      if (statrtMove) {
-        statrtMove = false;
-        centralMarker.style.cursor = "default";
-      }
-    });
+        if (change) {
+          this.parent.debounce(function () {
+            change([_x, _y], property, e.target, id, e);
+          }, 500)();
+        }
+      });
 
-    centralMarker.addEventListener("dblclick", (e) => {
-      const rect = e.target.getBoundingClientRect();
+      document.addEventListener("mouseup", (e) => {
+        if (statrtMove) {
+          statrtMove = false;
+          centralMarker.style.cursor = "default";
+        }
+      });
 
-      centralMarkerPoint.style.left = rect.width / 2 + "px";
-      centralMarkerPoint.style.top = rect.height / 2 + "px";
+      centralMarker.addEventListener("dblclick", (e) => {
+        const rect = e.target.getBoundingClientRect();
 
-      if (change) {
-        this.parent.debounce(function () {
-          change([50, 50], property, e.target, id, e);
-        }, 500)();
-      }
-    });
+        centralMarkerPoint.style.left = rect.width / 2 + "px";
+        centralMarkerPoint.style.top = rect.height / 2 + "px";
+
+        if (change) {
+          this.parent.debounce(function () {
+            change([50, 50], property, e.target, id, e);
+          }, 500)();
+        }
+      });
+    }
 
     return inspectorjs_value;
   }
@@ -704,21 +705,6 @@ export default class Create {
     id = this.parent.randomString(),
     change
   ){
-    // <multiSwitch>
-    //   <multiSwitchElem tabindex="0">
-    //     <div class="icons-textLeft"></div>
-    //   </multiSwitchElem>
-    //   <multiSwitchElem active tabindex="0">
-    //     <div class="icons-textCenter"></div>
-    //   </multiSwitchElem>
-    //   <multiSwitchElem tabindex="0">
-    //     <div class="icons-textRight"></div>
-    //   </multiSwitchElem>
-    //   <multiSwitchElem tabindex="0">
-    //     <div class="icons-textWidth"></div>
-    //   </multiSwitchElem>
-    // </multiSwitch>;
-
     let inspectorjs_value = document.createElement("inspectorjs_value");
     let letinspectorjs_value_property = document.createElement("div");
     let multiSwitch = document.createElement("multiSwitch");
