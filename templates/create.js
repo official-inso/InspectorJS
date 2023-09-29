@@ -240,6 +240,17 @@ export default class Create {
         if (x > rect.width) x = rect.width;
         if (y > rect.height) y = rect.height;
 
+        // Примагничивание к центру если близко
+        if(!e.ctrlKey){
+          if (x > rect.width / 2 - 5 && x < rect.width / 2 + 5) {
+            x = rect.width / 2;
+          }
+          if (y > rect.height / 2 - 5 && y < rect.height / 2 + 5) {
+            y = rect.height / 2;
+          }
+        }
+        
+
         centralMarkerPoint.style.left = x + "px";
         centralMarkerPoint.style.top = y + "px";
 
@@ -369,7 +380,7 @@ export default class Create {
     return inspectorjs_value;
   }
 
-  alignX(
+  alignY(
     value = undefined,
     name = "Без определения",
     property = undefined,
@@ -527,7 +538,7 @@ export default class Create {
     return inspectorjs_value;
   }
 
-  alignY(
+  alignX(
     value = undefined,
     name = "Без определения",
     property = undefined,
