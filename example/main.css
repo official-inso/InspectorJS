@@ -790,3 +790,69 @@ centralMarkerPointBg:before{
   z-index: 99;
   border-radius: var(--radius-elg);
 }
+
+multiSwitch {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+multiSwitchElem {
+  width: 33%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  transition: var(--trans-md);
+  cursor: pointer;
+  background-color: #7e7e7e1c;
+}
+multiSwitchElem[active]{
+  background-color: var(--main-color1-hover);
+}
+multiSwitchElem > div{
+  height: 15px;
+  width: 15px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 13px;
+}
+.multiSwitchElem_icons-left {
+  background-image: url('./assets/svg/alignLeft.png');
+  filter: var(--invert0);
+}
+
+.multiSwitchElem_icons-right {
+  background-image: url('./assets/svg/alignRight.png');
+  filter: var(--invert0);
+}
+
+.multiSwitchElem_icons-centerX {
+  background-image: url('./assets/svg/alignCenterX.png');
+  filter: var(--invert0);
+}
+
+.multiSwitchElem_icons-top {
+  background-image: url('./assets/svg/alignTop.png');
+  filter: var(--invert0);
+}
+
+.multiSwitchElem_icons-bottom {
+  background-image: url('./assets/svg/alignBottom.png');
+  filter: var(--invert0);
+}
+
+.multiSwitchElem_icons-centerY {
+  background-image: url('./assets/svg/alignCenterY.png');
+  filter: var(--invert0);
+}

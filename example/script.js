@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
           id: "rndString1", // ID свойства (default: randomString(32))
           name: "Строковое значение", // Название свойства (default: "Без названия")
           property: "param1", // Произвольное значение (default: undefined)
-          type: "string", // multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+          type: "string", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
           value: "Hello world!", // Значение свойства (default: "")
           readonly: false, // Флаг только для чтения (default: false)
           change: (value, property, elem, id, e) => {
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
           id: "rndString1", // ID свойства (default: randomString(32))
           name: "Мультистроковое значение", // Название свойства (default: "Без названия")
           property: "param1", // Произвольное значение (default: undefined)
-          type: "multiString", // multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+          type: "multiString", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
           value: "Hello world!", // Значение свойства (default: "")
           readonly: false, // Флаг только для чтения (default: false)
           change: (value, property, elem, id, e) => {
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
           id: "rndString2", // ID свойства (default: randomString(32))
           name: "Целочисленное значение", // Название свойства (default: "Без названия")
           property: "param2", // Произвольное значение (default: undefined)
-          type: "integer", // multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+          type: "integer", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
           value: 50, // Значение свойства (default: 0)
           readonly: false, // Флаг только для чтения (default: false)
           min: -50, // Минимальное значение (default: 0)
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
           id: "rndString3", // ID свойства (default: randomString(32))
           name: "Дробное значение", // Название свойства (default: "Без названия")
           property: "param3", // Произвольное значение (default: undefined)
-          type: "float", // multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+          type: "float", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
           value: 1, // Значение свойства (default: 0)
           readonly: false, // Флаг только для чтения (default: false)
           min: 0, // Минимальное значение (default: undefined)
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
           id: "rndString4", // ID свойства (default: randomString(32))
           name: "Выпадающий список", // Название свойства (default: "Без названия")
           property: "param4", // Произвольное значение (default: undefined)
-          type: "select", // multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+          type: "select", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
           value: "key2", // Значение свойства (default: undefined)
           readonly: false, // Флаг только для чтения (default: false)
           options: {
@@ -103,8 +103,30 @@ document.addEventListener('DOMContentLoaded', function() {
           id: "rndString5", // ID свойства (default: randomString(32))
           name: "Выбор файла", // Название свойства (default: "Без названия")
           property: "param5", // Произвольное значение (default: undefined)
-          type: "file", // multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+          type: "file", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
           value: "image.png", // Значение свойства (default: undefined)
+          readonly: false, // Флаг только для чтения (default: false)
+          change: (value, property, elem, id, e) => {
+            console.log(value, property, elem, id, e);
+          }, // Функция callback при изменении значения (default: undefined)
+        },
+        {
+          id: "rndString987", // ID свойства (default: randomString(32))
+          name: "Выравнивание по оси Х", // Название свойства (default: "Без названия")
+          property: "param1", // Произвольное значение (default: undefined)
+          type: "alignX", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+          value: "left", // Значение свойства (default: "")
+          readonly: false, // Флаг только для чтения (default: false)
+          change: (value, property, elem, id, e) => {
+            console.log(value, property, elem, id, e);
+          }, // Функция callback при изменении значения (default: undefined)
+        },
+        {
+          id: "rndString987", // ID свойства (default: randomString(32))
+          name: "Выравнивание по оси Y", // Название свойства (default: "Без названия")
+          property: "param1", // Произвольное значение (default: undefined)
+          type: "alignY", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+          value: "center", // Значение свойства (default: "")
           readonly: false, // Флаг только для чтения (default: false)
           change: (value, property, elem, id, e) => {
             console.log(value, property, elem, id, e);
@@ -114,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
           id: "rndString6", // ID свойства (default: randomString(32))
           name: "Логическое значение", // Название свойства (default: "Без названия")
           property: "param6", // Произвольное значение (default: undefined)
-          type: "boolean", // multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+          type: "boolean", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
           value: true, // Значение свойства (default: false)
           readonly: false, // Флаг только для чтения (default: false)
           change: (value, property, elem, id, e) => {
@@ -125,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
           id: "rndString7", // ID свойства (default: randomString(32))
           name: "Выбор цвета", // Название свойства (default: "Без названия")
           property: "param7", // Произвольное значение (default: undefined)
-          type: "color", // multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+          type: "color", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
           value: "#000000", // Значение свойства (default: undefined)
           readonly: false, // Флаг только для чтения (default: false)
           change: (value, property, elem, id, e) => {
@@ -136,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
           id: "rndString17", // ID свойства (default: randomString(32))
           name: "Кнопка", // Название свойства (default: "Без названия")
           property: "param99", // Произвольное значение (default: undefined)
-          type: "button", // multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+          type: "button", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
           icon: "icons-info", // Иконка кнопки (default: undefined)
           // bg: "#AA2F05", // Цвет фона кнопки (default: undefined)
           text: "Действие", // Значение свойства (default: undefined)
@@ -149,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
           id: "rndString8", // ID свойства (default: randomString(32))
           name: "Ползунок", // Название свойства (default: "Без названия")
           property: "param8", // Произвольное значение (default: undefined)
-          type: "slider", // multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+          type: "slider", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
           value: 0, // Значение свойства (default: 0)
           step: 0.1, // Шаг изменения (default: 1)
           min: -250, // Минимальное значение (default: 0)
@@ -163,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
           id: "rndString9", // ID свойства (default: randomString(32))
           name: "Множественные значения", // Название свойства (default: "Без названия")
           property: "param9", // Произвольное значение (default: undefined)
-          type: "values", // multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+          type: "values", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
           group: "2", // 1 | 2 | 3 | 4 | auto (default: "auto")
           value: [
             {
@@ -182,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
             {
               id: "rndString914", // ID свойства (default: randomString(32))
               name: "Кнопка", // Название свойства (default: "Без названия")
-              type: "button", // multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+              type: "button", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
               bg: "#AA2F05", // Цвет фона кнопки (default: undefined)
               text: "Действие", // Значение свойства (default: undefined)
               click: (property, values, elem, id, e) => {
@@ -193,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
               id: "rndString9", // ID свойства (default: randomString(32))
               name: "Множественные значения", // Название свойства (default: "Без названия")
               property: "param9", // Произвольное значение (default: undefined)
-              type: "values", // multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+              type: "values", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
               group: "2", // 1 | 2 | 3 | 4 | auto (default: "auto")
               value: [
                 {

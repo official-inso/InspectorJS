@@ -201,6 +201,30 @@ export default class InspectorJS {
             );
             group.appendChild(input);
           }
+
+          else if (property.type == "alignX") {
+            let input = this.templates.create.alignX(
+              property.value,
+              property.name,
+              property.property,
+              property.readonly,
+              property.id,
+              property.change
+            );
+            group.appendChild(input);
+          }
+
+          else if (property.type == "alignY") {
+            let input = this.templates.create.alignY(
+              property.value,
+              property.name,
+              property.property,
+              property.readonly,
+              property.id,
+              property.change
+            );
+            group.appendChild(input);
+          }
           
           else {
             let input = this.templates.create.valueString(

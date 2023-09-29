@@ -152,8 +152,14 @@ export default class Create {
     return inspectorjs_value;
   }
 
-  centerMarker(value = [50, 50], name = "Без определения", property = undefined, readonly = false, id = this.parent.randomString(), change){
-
+  centerMarker(
+    value = [50, 50],
+    name = "Без определения",
+    property = undefined,
+    readonly = false,
+    id = this.parent.randomString(),
+    change
+  ) {
     let inspectorjs_value = document.createElement("inspectorjs_value");
     let letinspectorjs_value_property = document.createElement("div");
     let centralMarker = document.createElement("centralMarker");
@@ -162,7 +168,9 @@ export default class Create {
     let centralMarkerAxisOxBg = document.createElement("centralMarkerAxisOxBg");
     let centralMarkerAxisOy = document.createElement("centralMarkerAxisOy");
     let centralMarkerAxisOyBg = document.createElement("centralMarkerAxisOyBg");
-    let centralMarkerAxisPoint = document.createElement("centralMarkerAxisPoint");
+    let centralMarkerAxisPoint = document.createElement(
+      "centralMarkerAxisPoint"
+    );
     let centralMarkerPoint = document.createElement("centralMarkerPoint");
     let centralMarkerPointBg = document.createElement("centralMarkerPointBg");
     let inspectorjs_value_value = document.createElement("div");
@@ -173,7 +181,7 @@ export default class Create {
 
     inspectorjs_value_value.classList.add("inspectorjs_value_value");
 
-    centralMarker.setAttribute('tabindex', "0")
+    centralMarker.setAttribute("tabindex", "0");
 
     centralMarkerAxisOx.appendChild(centralMarkerAxisOxBg);
     centralMarkerAxisOy.appendChild(centralMarkerAxisOyBg);
@@ -187,13 +195,13 @@ export default class Create {
     inspectorjs_value.appendChild(letinspectorjs_value_property);
     inspectorjs_value.appendChild(inspectorjs_value_value);
 
-    centralMarkerPoint.style.left = value[0] + '%';
-    centralMarkerPoint.style.top = value[1] + '%';
+    centralMarkerPoint.style.left = value[0] + "%";
+    centralMarkerPoint.style.top = value[1] + "%";
 
     let statrtMove = false;
     let ev = undefined;
 
-    centralMarkerAxis.addEventListener('mousedown', (e) => {
+    centralMarkerAxis.addEventListener("mousedown", (e) => {
       const rect = e.target.getBoundingClientRect();
       let x = e.clientX - rect.left;
       let y = e.clientY - rect.top;
@@ -206,139 +214,426 @@ export default class Create {
       if (x > rect.width) x = rect.width;
       if (y > rect.height) y = rect.height;
 
-      centralMarkerPoint.style.left = x + 'px';
-      centralMarkerPoint.style.top = y + 'px';
+      centralMarkerPoint.style.left = x + "px";
+      centralMarkerPoint.style.top = y + "px";
 
-      let _x = x / centralMarkerAxis.offsetWidth * 100;
-      let _y = y / centralMarkerAxis.offsetHeight * 100;
+      let _x = (x / centralMarkerAxis.offsetWidth) * 100;
+      let _y = (y / centralMarkerAxis.offsetHeight) * 100;
 
-      centralMarker.style.cursor = 'none';
+      centralMarker.style.cursor = "none";
 
-      if(change) {
+      if (change) {
         this.parent.debounce(function () {
           change([_x, _y], property, e.target, id, e);
         }, 500)();
       }
     });
 
-    document.addEventListener('mousemove', (e) => {
-      if(statrtMove) {
+    document.addEventListener("mousemove", (e) => {
+      if (statrtMove) {
         const rect = ev.target.getBoundingClientRect();
         let x = e.clientX - rect.left;
         let y = e.clientY - rect.top;
 
-        if(x < 0) x = 0;
-        if(y < 0) y = 0;
-        if(x > rect.width) x = rect.width;
-        if(y > rect.height) y = rect.height;
+        if (x < 0) x = 0;
+        if (y < 0) y = 0;
+        if (x > rect.width) x = rect.width;
+        if (y > rect.height) y = rect.height;
 
-        centralMarkerPoint.style.left = x + 'px';
-        centralMarkerPoint.style.top = y + 'px';
+        centralMarkerPoint.style.left = x + "px";
+        centralMarkerPoint.style.top = y + "px";
 
-        let _x = x / centralMarkerAxis.offsetWidth * 100;
-        let _y = y / centralMarkerAxis.offsetHeight * 100;
+        let _x = (x / centralMarkerAxis.offsetWidth) * 100;
+        let _y = (y / centralMarkerAxis.offsetHeight) * 100;
 
         if (change) {
           this.parent.debounce(function () {
             change([_x, _y], property, e.target, id, e);
           }, 500)();
         }
-      }      
+      }
     });
 
-    centralMarker.addEventListener('keydown', (e) => {
-      if (e.keyCode == 37 || e.which == 37 || e.key == 'ArrowLeft' || e.key == 'a') {
+    centralMarker.addEventListener("keydown", (e) => {
+      if (
+        e.keyCode == 37 ||
+        e.which == 37 ||
+        e.key == "ArrowLeft" ||
+        e.key == "a"
+      ) {
         let x = parseFloat(centralMarkerPoint.style.left);
 
-        if(e.ctrlKey)  {
+        if (e.ctrlKey) {
           x -= 10;
-        }
-        else if(e.shiftKey)  {
+        } else if (e.shiftKey) {
           x -= 0.1;
-        }
-        else {
+        } else {
           x -= 1;
         }
         if (x < 0) x = 0;
-        centralMarkerPoint.style.left = x + 'px';
+        centralMarkerPoint.style.left = x + "px";
       }
 
-      if (e.keyCode == 38 || e.which == 38 || e.key == 'ArrowUp' || e.key == 'w') {
+      if (
+        e.keyCode == 38 ||
+        e.which == 38 ||
+        e.key == "ArrowUp" ||
+        e.key == "w"
+      ) {
         let y = parseFloat(centralMarkerPoint.style.top);
-        if(e.ctrlKey)  {
+        if (e.ctrlKey) {
           y -= 10;
-        }
-        else if(e.shiftKey)  {
+        } else if (e.shiftKey) {
           y -= 0.1;
-        }
-        else {
+        } else {
           y -= 1;
         }
         if (y < 0) y = 0;
-        centralMarkerPoint.style.top = y + 'px';
+        centralMarkerPoint.style.top = y + "px";
       }
 
-      if (e.keyCode == 39 || e.which == 39 || e.key == 'ArrowRight' || e.key == 'd') {
+      if (
+        e.keyCode == 39 ||
+        e.which == 39 ||
+        e.key == "ArrowRight" ||
+        e.key == "d"
+      ) {
         let x = parseFloat(centralMarkerPoint.style.left);
-        if(e.ctrlKey)  {
+        if (e.ctrlKey) {
           x += 10;
-        }
-        else if(e.shiftKey)  {
+        } else if (e.shiftKey) {
           x += 0.1;
-        }
-        else {
+        } else {
           x += 1;
         }
-        if (x > centralMarkerAxis.offsetWidth) x = centralMarkerAxis.offsetWidth;
-        centralMarkerPoint.style.left = x + 'px';
+        if (x > centralMarkerAxis.offsetWidth)
+          x = centralMarkerAxis.offsetWidth;
+        centralMarkerPoint.style.left = x + "px";
       }
 
-      if (e.keyCode == 40 || e.which == 40 || e.key == 'ArrowDown' || e.key == 's') {
+      if (
+        e.keyCode == 40 ||
+        e.which == 40 ||
+        e.key == "ArrowDown" ||
+        e.key == "s"
+      ) {
         let y = parseFloat(centralMarkerPoint.style.top);
         if (e.ctrlKey) {
           y += 10;
-        }
-        else if (e.shiftKey) {
+        } else if (e.shiftKey) {
           y += 0.1;
-        }
-        else {
+        } else {
           y += 1;
         }
-        if (y > centralMarkerAxis.offsetHeight) y = centralMarkerAxis.offsetHeight;
-        centralMarkerPoint.style.top = y + 'px';
+        if (y > centralMarkerAxis.offsetHeight)
+          y = centralMarkerAxis.offsetHeight;
+        centralMarkerPoint.style.top = y + "px";
       }
 
-      let _x = parseFloat(centralMarkerPoint.style.left) / centralMarkerAxis.offsetWidth * 100;
-      let _y = parseFloat(centralMarkerPoint.style.top) / centralMarkerAxis.offsetHeight * 100;
+      let _x =
+        (parseFloat(centralMarkerPoint.style.left) /
+          centralMarkerAxis.offsetWidth) *
+        100;
+      let _y =
+        (parseFloat(centralMarkerPoint.style.top) /
+          centralMarkerAxis.offsetHeight) *
+        100;
 
       if (change) {
         this.parent.debounce(function () {
           change([_x, _y], property, e.target, id, e);
         }, 500)();
       }
-    })
+    });
 
-    document.addEventListener('mouseup', (e) => {
+    document.addEventListener("mouseup", (e) => {
       if (statrtMove) {
         statrtMove = false;
-        centralMarker.style.cursor = 'default';
+        centralMarker.style.cursor = "default";
       }
     });
 
-    centralMarker.addEventListener('dblclick', (e) => {
+    centralMarker.addEventListener("dblclick", (e) => {
       const rect = e.target.getBoundingClientRect();
 
-      centralMarkerPoint.style.left = rect.width / 2 + 'px';
-      centralMarkerPoint.style.top = rect.height / 2 + 'px';
+      centralMarkerPoint.style.left = rect.width / 2 + "px";
+      centralMarkerPoint.style.top = rect.height / 2 + "px";
 
       if (change) {
         this.parent.debounce(function () {
           change([50, 50], property, e.target, id, e);
         }, 500)();
       }
-    })
+    });
 
+    return inspectorjs_value;
+  }
 
+  alignX(
+    value = undefined,
+    name = "Без определения",
+    property = undefined,
+    readonly = false,
+    id = this.parent.randomString(),
+    change
+  ) {
+    let inspectorjs_value = document.createElement("inspectorjs_value");
+    let letinspectorjs_value_property = document.createElement("div");
+    let multiSwitch = document.createElement("multiSwitch");
+    let multiSwitchElem1 = document.createElement("multiSwitchElem");
+    let multiSwitchElem2 = document.createElement("multiSwitchElem");
+    let multiSwitchElem3 = document.createElement("multiSwitchElem");
+    let inspectorjs_value_value = document.createElement("div");
+
+    inspectorjs_value.setAttribute("id", id);
+    letinspectorjs_value_property.classList.add("inspectorjs_value_property");
+    letinspectorjs_value_property.innerHTML = name;
+
+    inspectorjs_value_value.classList.add("inspectorjs_value_value");
+    inspectorjs_value_value.setAttribute("full", "true");
+
+    multiSwitchElem1.setAttribute("tabindex", "0");
+    multiSwitchElem2.setAttribute("tabindex", "0");
+    multiSwitchElem3.setAttribute("tabindex", "0");
+
+    multiSwitchElem1.innerHTML = '<div class="multiSwitchElem_icons-left"></div>';
+    multiSwitchElem2.innerHTML = '<div class="multiSwitchElem_icons-centerX"></div>';
+    multiSwitchElem3.innerHTML = '<div class="multiSwitchElem_icons-right"></div>';
+
+    multiSwitch.appendChild(multiSwitchElem1);
+    multiSwitch.appendChild(multiSwitchElem2);
+    multiSwitch.appendChild(multiSwitchElem3);
+
+    inspectorjs_value_value.appendChild(multiSwitch);
+    inspectorjs_value.appendChild(letinspectorjs_value_property);
+    inspectorjs_value.appendChild(inspectorjs_value_value);
+
+    if(value == "left") {
+      multiSwitchElem1.setAttribute("active", "true");
+    }
+
+    if(value == "center") {
+      multiSwitchElem2.setAttribute("active", "true");
+    }
+
+    if(value == "right") {
+      multiSwitchElem3.setAttribute("active", "true");
+    }
+
+    if(!readonly) {
+      multiSwitchElem1.addEventListener("click", (e) => {
+        multiSwitchElem1.setAttribute("active", "true");
+        multiSwitchElem2.removeAttribute("active");
+        multiSwitchElem3.removeAttribute("active");
+
+        if (change) {
+          this.parent.debounce(function () {
+            change("left", property, e.target, id, e);
+          }, 500)();
+        }
+      });
+
+      multiSwitchElem2.addEventListener("click", (e) => {
+        multiSwitchElem1.removeAttribute("active");
+        multiSwitchElem2.setAttribute("active", "true");
+        multiSwitchElem3.removeAttribute("active");
+
+        if (change) {
+          this.parent.debounce(function () {
+            change("center", property, e.target, id, e);
+          }, 500)();
+        }
+      });
+
+      multiSwitchElem3.addEventListener("click", (e) => {
+        multiSwitchElem1.removeAttribute("active");
+        multiSwitchElem2.removeAttribute("active");
+        multiSwitchElem3.setAttribute("active", "true");
+
+        if (change) {
+          this.parent.debounce(function () {
+            change("right", property, e.target, id, e);
+          }, 500)();
+        }
+      });
+
+      multiSwitchElem1.addEventListener("keydown", (e) => {
+        if (e.keyCode == 13 || e.which == 13 || e.key == "Enter" || e.keyCode == 32 || e.which == 32 || e.key == " ") {
+          multiSwitchElem1.setAttribute("active", "true");
+          multiSwitchElem2.removeAttribute("active");
+          multiSwitchElem3.removeAttribute("active");
+
+          if (change) {
+            this.parent.debounce(function () {
+              change("left", property, e.target, id, e);
+            }, 500)();
+          }
+        }
+      });
+
+      multiSwitchElem2.addEventListener("keydown", (e) => {
+        if (e.keyCode == 13 || e.which == 13 || e.key == "Enter" || e.keyCode == 32 || e.which == 32 || e.key == " ") {
+          multiSwitchElem1.removeAttribute("active");
+          multiSwitchElem2.setAttribute("active", "true");
+          multiSwitchElem3.removeAttribute("active");
+
+          if (change) {
+            this.parent.debounce(function () {
+              change("center", property, e.target, id, e);
+            }, 500)();
+          }
+        }
+      });
+
+      multiSwitchElem3.addEventListener("keydown", (e) => {
+        if (e.keyCode == 13 || e.which == 13 || e.key == "Enter" || e.keyCode == 32 || e.which == 32 || e.key == " ") {
+          multiSwitchElem1.removeAttribute("active");
+          multiSwitchElem2.removeAttribute("active");
+          multiSwitchElem3.setAttribute("active", "true");
+
+          if (change) {
+            this.parent.debounce(function () {
+              change("right", property, e.target, id, e);
+            }, 500)();
+          }
+        }
+      });
+
+    }
+
+    return inspectorjs_value;
+  }
+
+  alignY(
+    value = undefined,
+    name = "Без определения",
+    property = undefined,
+    readonly = false,
+    id = this.parent.randomString(),
+    change
+  ) {
+    let inspectorjs_value = document.createElement("inspectorjs_value");
+    let letinspectorjs_value_property = document.createElement("div");
+    let multiSwitch = document.createElement("multiSwitch");
+    let multiSwitchElem1 = document.createElement("multiSwitchElem");
+    let multiSwitchElem2 = document.createElement("multiSwitchElem"); 
+    let multiSwitchElem3 = document.createElement("multiSwitchElem");
+    let inspectorjs_value_value = document.createElement("div");
+
+    inspectorjs_value.setAttribute("id", id);
+    letinspectorjs_value_property.classList.add("inspectorjs_value_property");
+    letinspectorjs_value_property.innerHTML = name;
+
+    inspectorjs_value_value.classList.add("inspectorjs_value_value");
+    inspectorjs_value_value.setAttribute("full", "true");
+
+    multiSwitchElem1.setAttribute("tabindex", "0");
+    multiSwitchElem2.setAttribute("tabindex", "0");
+    multiSwitchElem3.setAttribute("tabindex", "0");
+
+    multiSwitchElem1.innerHTML = '<div class="multiSwitchElem_icons-top"></div>';
+    multiSwitchElem2.innerHTML = '<div class="multiSwitchElem_icons-centerY"></div>';
+    multiSwitchElem3.innerHTML = '<div class="multiSwitchElem_icons-bottom"></div>';
+
+    multiSwitch.appendChild(multiSwitchElem1);
+    multiSwitch.appendChild(multiSwitchElem2);
+    multiSwitch.appendChild(multiSwitchElem3);
+
+    inspectorjs_value_value.appendChild(multiSwitch);
+    inspectorjs_value.appendChild(letinspectorjs_value_property);
+    inspectorjs_value.appendChild(inspectorjs_value_value);
+    
+    if(value == "top") {
+      multiSwitchElem1.setAttribute("active", "true");
+    }
+
+    if(value == "center") {
+      multiSwitchElem2.setAttribute("active", "true");
+    }
+
+    if(value == "bottom") {
+      multiSwitchElem3.setAttribute("active", "true");
+    }
+
+    if(!readonly) {
+      multiSwitchElem1.addEventListener("click", (e) => {
+        multiSwitchElem1.setAttribute("active", "true");
+        multiSwitchElem2.removeAttribute("active");
+        multiSwitchElem3.removeAttribute("active");
+
+        if (change) {
+          this.parent.debounce(function () {
+            change("top", property, e.target, id, e);
+          }, 500)();
+        }
+      });
+
+      multiSwitchElem2.addEventListener("click", (e) => {
+        multiSwitchElem1.removeAttribute("active");
+        multiSwitchElem2.setAttribute("active", "true");
+        multiSwitchElem3.removeAttribute("active");
+
+        if (change) {
+          this.parent.debounce(function () {
+            change("center", property, e.target, id, e);
+          }, 500)();
+        }
+      });
+
+      multiSwitchElem3.addEventListener("click", (e) => {
+        multiSwitchElem1.removeAttribute("active");
+        multiSwitchElem2.removeAttribute("active");
+        multiSwitchElem3.setAttribute("active", "true");
+
+        if (change) {
+          this.parent.debounce(function () {
+            change("bottom", property, e.target, id, e);
+          }, 500)();
+        }
+      });
+
+      multiSwitchElem1.addEventListener("keydown", (e) => {
+        if (e.keyCode == 13 || e.which == 13 || e.key == "Enter" || e.keyCode == 32 || e.which == 32 || e.key == " ") {
+          multiSwitchElem1.setAttribute("active", "true");
+          multiSwitchElem2.removeAttribute("active");
+          multiSwitchElem3.removeAttribute("active");
+
+          if (change) {
+            this.parent.debounce(function () {
+              change("top", property, e.target, id, e);
+            }, 500)();
+          }
+        }
+      });
+
+      multiSwitchElem2.addEventListener("keydown", (e) => {
+        if (e.keyCode == 13 || e.which == 13 || e.key == "Enter" || e.keyCode == 32 || e.which == 32 || e.key == " ") {
+          multiSwitchElem1.removeAttribute("active");
+          multiSwitchElem2.setAttribute("active", "true");
+          multiSwitchElem3.removeAttribute("active");
+
+          if (change) {
+            this.parent.debounce(function () {
+              change("center", property, e.target, id, e);
+            }, 500)();
+          }
+        }
+      });
+
+      multiSwitchElem3.addEventListener("keydown", (e) => {
+        if (e.keyCode == 13 || e.which == 13 || e.key == "Enter" || e.keyCode == 32 || e.which == 32 || e.key == " ") {
+          multiSwitchElem1.removeAttribute("active");
+          multiSwitchElem2.removeAttribute("active");
+          multiSwitchElem3.setAttribute("active", "true");
+
+          if (change) {
+            this.parent.debounce(function () {
+              change("bottom", property, e.target, id, e);
+            }, 500)();
+          }
+        }
+      });
+    }
 
     return inspectorjs_value;
   }
@@ -375,9 +670,9 @@ export default class Create {
     input.style.minWidth = "calc(100% - 10px)";
     input.style.maxHeight = "200px";
     input.style.minHeight = "25px";
-    input.style.height = 'auto';
+    input.style.height = "auto";
     input.style.resize = "vertical";
-    input.style.lineHeight = "14px"; 
+    input.style.lineHeight = "14px";
 
     input.value = value;
 
@@ -490,15 +785,23 @@ export default class Create {
           e.target.value = val;
 
           if (change) {
-            if(groupEvent) {
+            if (groupEvent) {
               const arr = this.returnsGroupValue(
                 e.target.parentElement.parentElement.parentElement
               );
-              change(parseInt(val), arr, e.target.parentElement.parentElement.parentElement.getAttribute("property"), e.target, id, e);
+              change(
+                parseInt(val),
+                arr,
+                e.target.parentElement.parentElement.parentElement.getAttribute(
+                  "property"
+                ),
+                e.target,
+                id,
+                e
+              );
             } else {
               change(parseInt(val), property, e.target, id, e);
             }
-            
           }
         }
       }, 500)();
@@ -541,7 +844,7 @@ export default class Create {
 
     if (step) {
       let _stepLength;
-      if (step % 1 != 0){
+      if (step % 1 != 0) {
         _stepLength = step.toString().split(".")[1].length;
       } else {
         _stepLength = 0;
@@ -598,13 +901,20 @@ export default class Create {
               const arr = this.returnsGroupValue(
                 e.target.parentElement.parentElement.parentElement
               );
-              change(parseFloat(stepValue), arr, e.target.parentElement.parentElement.parentElement.getAttribute("property"), e.target, id, e);
+              change(
+                parseFloat(stepValue),
+                arr,
+                e.target.parentElement.parentElement.parentElement.getAttribute(
+                  "property"
+                ),
+                e.target,
+                id,
+                e
+              );
             } else {
               change(parseFloat(stepValue), property, e.target, id, e);
             }
           }
-
-          
 
           e.target.setAttribute("value", stepValue);
           e.target.value = stepValue;
@@ -749,13 +1059,20 @@ export default class Create {
               const arr = this.returnsGroupValue(
                 e.target.parentElement.parentElement.parentElement.parentElement
               );
-              change(val, arr, e.target.parentElement.parentElement.parentElement.parentElement.getAttribute("property"), e.target, id, e);
+              change(
+                val,
+                arr,
+                e.target.parentElement.parentElement.parentElement.parentElement.getAttribute(
+                  "property"
+                ),
+                e.target,
+                id,
+                e
+              );
             } else {
               change(val, property, e.target, id, e);
             }
           }
-
-          
         }
       }, 250)();
     });
@@ -811,23 +1128,29 @@ export default class Create {
       select.appendChild(optionElement);
     }
 
-    
     select.addEventListener("change", (e) => {
       this.parent.debounce(() => {
         const val = e.target.value;
         const initialValue = e.target.getAttribute("initial-value");
 
         if (val != initialValue) {
-          
           select.setAttribute("initial-value", val);
 
           if (change) {
             if (groupEvent) {
               const arr = this.returnsGroupValue(
-                e.target.parentElement.parentElement.parentElement
-                  .parentElement
+                e.target.parentElement.parentElement.parentElement.parentElement
               );
-              change(val, arr, e.target.parentElement.parentElement.parentElement.getAttribute("property"), e.target, id, e);
+              change(
+                val,
+                arr,
+                e.target.parentElement.parentElement.parentElement.getAttribute(
+                  "property"
+                ),
+                e.target,
+                id,
+                e
+              );
             } else {
               e.target.setAttribute("initial-value", val);
               change(val, property, e.target, id, e);
@@ -836,7 +1159,6 @@ export default class Create {
         }
       }, 50)();
     });
-    
 
     inspectorjs_value_value.appendChild(select);
     inspectorjs_value.appendChild(letinspectorjs_value_property);
@@ -969,8 +1291,8 @@ export default class Create {
       input_number.setAttribute("value", step);
     }
 
-    if(min && max) {
-      input_range.addEventListener('dblclick', (e) => {
+    if (min && max) {
+      input_range.addEventListener("dblclick", (e) => {
         let average = (min + max) / 2;
 
         if (step) {
@@ -992,7 +1314,7 @@ export default class Create {
             change(average, property, e.target, id, e);
           }, 500)();
         }
-      })
+      });
     }
 
     readonly ? input_range.setAttribute("readonly", readonly) : null;
@@ -1095,8 +1417,16 @@ export default class Create {
     return inspectorjs_value;
   }
 
-  valueButton(text = "Выполнить", iconClass = undefined, bg = undefined, name = "Без определения", property = undefined, id = this.parent.randomString(), click, groupEvent = false){
-  
+  valueButton(
+    text = "Выполнить",
+    iconClass = undefined,
+    bg = undefined,
+    name = "Без определения",
+    property = undefined,
+    id = this.parent.randomString(),
+    click,
+    groupEvent = false
+  ) {
     let inspectorjs_value = document.createElement("inspectorjs_value");
     let letinspectorjs_value_property = document.createElement("div");
     let inspectorjs_value_value = document.createElement("div");
@@ -1106,20 +1436,20 @@ export default class Create {
 
     button_text.innerHTML = text;
 
-    if(iconClass) {
+    if (iconClass) {
       icon.classList.add("icon");
       icon.classList.add(iconClass);
       button.appendChild(icon);
     }
-    
-    if(bg) {
+
+    if (bg) {
       button.style.backgroundColor = bg;
-      button.setAttribute('default', 'false')
+      button.setAttribute("default", "false");
       this.parent.isBrightColor(bg)
         ? (button.style.color = "#000")
         : (button.style.color = "#fff");
     } else {
-      button.setAttribute('default', 'true')
+      button.setAttribute("default", "true");
     }
 
     button.classList.add("inspectorjs_property_button");
@@ -1131,27 +1461,33 @@ export default class Create {
 
     inspectorjs_value_value.classList.add("inspectorjs_value_value");
 
-    inspectorjs_value_value.appendChild(button)
-    
+    inspectorjs_value_value.appendChild(button);
+
     inspectorjs_value.appendChild(letinspectorjs_value_property);
     inspectorjs_value.appendChild(inspectorjs_value_value);
 
-    if(click) {
-      button.addEventListener('click', (e) => {
-        if (groupEvent){
+    if (click) {
+      button.addEventListener("click", (e) => {
+        if (groupEvent) {
           const arr = this.returnsGroupValue(
-            e.target.parentElement.parentElement.parentElement
-              .parentElement
+            e.target.parentElement.parentElement.parentElement.parentElement
           );
-          click(e.target.parentElement.parentElement.parentElement.getAttribute("property"), arr, e.target, id, e)
+          click(
+            e.target.parentElement.parentElement.parentElement.getAttribute(
+              "property"
+            ),
+            arr,
+            e.target,
+            id,
+            e
+          );
         } else {
-          click(property, e.target, id, e)
+          click(property, e.target, id, e);
         }
-      })
-    }    
+      });
+    }
 
     return inspectorjs_value;
-
   }
 
   valueValues(
@@ -1167,7 +1503,7 @@ export default class Create {
     let inspectorjs_value_value = document.createElement("div");
 
     inspectorjs_value.setAttribute("id", id);
-    
+
     inspectorjs_value_property.classList.add("inspectorjs_value_property");
     inspectorjs_value_property.innerHTML = name;
 
@@ -1190,10 +1526,10 @@ export default class Create {
       }
     }
 
-    if (name != ""){
+    if (name != "") {
       inspectorjs_value.appendChild(inspectorjs_value_property);
     }
-    
+
     inspectorjs_value.appendChild(inspectorjs_value_value);
 
     return inspectorjs_value;
@@ -1213,7 +1549,7 @@ export default class Create {
         data.step,
         data.id,
         data.change,
-        true,
+        true
       );
     } else if (data.type == "float") {
       out = this.valueFloat(
@@ -1236,7 +1572,7 @@ export default class Create {
         data.readonly,
         data.id,
         data.change,
-        true,
+        true
       );
     } else if (data.type == "select") {
       out = this.valueSelect(
@@ -1247,7 +1583,7 @@ export default class Create {
         data.options,
         data.id,
         data.change,
-        true,
+        true
       );
     } else if (data.type == "button") {
       out = this.valueButton(
@@ -1258,7 +1594,7 @@ export default class Create {
         data.id,
         data.id,
         data.click,
-        true,
+        true
       );
     } else if (data.type == "values") {
       out = this.valueValues(
@@ -1284,7 +1620,7 @@ export default class Create {
     return out;
   }
 
-  returnsGroupValue(gr){
+  returnsGroupValue(gr) {
     let arr = [];
     let valuesInputs = gr.querySelectorAll("input");
     let valuesSelected = gr.querySelectorAll("select");
