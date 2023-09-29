@@ -33,6 +33,26 @@
   font-family: ico;
 }
 
+.icons-textCenter:before {
+  content: "\E81F";
+  font-family: ico;
+}
+
+.icons-textWidth:before {
+  content: "\E821";
+  font-family: ico;
+}
+
+.icons-textLeft:before {
+  content: "\E822";
+  font-family: ico;
+}
+
+.icons-textRight:before {
+  content: "\E823";
+  font-family: ico;
+}
+
 .icons-warning2:before {
   content: "\E81B";
   font-family: ico;

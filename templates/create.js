@@ -396,9 +396,12 @@ export default class Create {
     multiSwitchElem2.setAttribute("tabindex", "0");
     multiSwitchElem3.setAttribute("tabindex", "0");
 
-    multiSwitchElem1.innerHTML = '<div class="multiSwitchElem_icons-left"></div>';
-    multiSwitchElem2.innerHTML = '<div class="multiSwitchElem_icons-centerX"></div>';
-    multiSwitchElem3.innerHTML = '<div class="multiSwitchElem_icons-right"></div>';
+    multiSwitchElem1.innerHTML =
+      '<div class="multiSwitchElem_icons-left"></div>';
+    multiSwitchElem2.innerHTML =
+      '<div class="multiSwitchElem_icons-centerX"></div>';
+    multiSwitchElem3.innerHTML =
+      '<div class="multiSwitchElem_icons-right"></div>';
 
     multiSwitch.appendChild(multiSwitchElem1);
     multiSwitch.appendChild(multiSwitchElem2);
@@ -408,19 +411,19 @@ export default class Create {
     inspectorjs_value.appendChild(letinspectorjs_value_property);
     inspectorjs_value.appendChild(inspectorjs_value_value);
 
-    if(value == "left") {
+    if (value == "left") {
       multiSwitchElem1.setAttribute("active", "true");
     }
 
-    if(value == "center") {
+    if (value == "center") {
       multiSwitchElem2.setAttribute("active", "true");
     }
 
-    if(value == "right") {
+    if (value == "right") {
       multiSwitchElem3.setAttribute("active", "true");
     }
 
-    if(!readonly) {
+    if (!readonly) {
       multiSwitchElem1.addEventListener("click", (e) => {
         multiSwitchElem1.setAttribute("active", "true");
         multiSwitchElem2.removeAttribute("active");
@@ -458,7 +461,14 @@ export default class Create {
       });
 
       multiSwitchElem1.addEventListener("keydown", (e) => {
-        if (e.keyCode == 13 || e.which == 13 || e.key == "Enter" || e.keyCode == 32 || e.which == 32 || e.key == " ") {
+        if (
+          e.keyCode == 13 ||
+          e.which == 13 ||
+          e.key == "Enter" ||
+          e.keyCode == 32 ||
+          e.which == 32 ||
+          e.key == " "
+        ) {
           multiSwitchElem1.setAttribute("active", "true");
           multiSwitchElem2.removeAttribute("active");
           multiSwitchElem3.removeAttribute("active");
@@ -472,7 +482,14 @@ export default class Create {
       });
 
       multiSwitchElem2.addEventListener("keydown", (e) => {
-        if (e.keyCode == 13 || e.which == 13 || e.key == "Enter" || e.keyCode == 32 || e.which == 32 || e.key == " ") {
+        if (
+          e.keyCode == 13 ||
+          e.which == 13 ||
+          e.key == "Enter" ||
+          e.keyCode == 32 ||
+          e.which == 32 ||
+          e.key == " "
+        ) {
           multiSwitchElem1.removeAttribute("active");
           multiSwitchElem2.setAttribute("active", "true");
           multiSwitchElem3.removeAttribute("active");
@@ -486,7 +503,14 @@ export default class Create {
       });
 
       multiSwitchElem3.addEventListener("keydown", (e) => {
-        if (e.keyCode == 13 || e.which == 13 || e.key == "Enter" || e.keyCode == 32 || e.which == 32 || e.key == " ") {
+        if (
+          e.keyCode == 13 ||
+          e.which == 13 ||
+          e.key == "Enter" ||
+          e.keyCode == 32 ||
+          e.which == 32 ||
+          e.key == " "
+        ) {
           multiSwitchElem1.removeAttribute("active");
           multiSwitchElem2.removeAttribute("active");
           multiSwitchElem3.setAttribute("active", "true");
@@ -498,7 +522,6 @@ export default class Create {
           }
         }
       });
-
     }
 
     return inspectorjs_value;
@@ -516,7 +539,7 @@ export default class Create {
     let letinspectorjs_value_property = document.createElement("div");
     let multiSwitch = document.createElement("multiSwitch");
     let multiSwitchElem1 = document.createElement("multiSwitchElem");
-    let multiSwitchElem2 = document.createElement("multiSwitchElem"); 
+    let multiSwitchElem2 = document.createElement("multiSwitchElem");
     let multiSwitchElem3 = document.createElement("multiSwitchElem");
     let inspectorjs_value_value = document.createElement("div");
 
@@ -531,9 +554,12 @@ export default class Create {
     multiSwitchElem2.setAttribute("tabindex", "0");
     multiSwitchElem3.setAttribute("tabindex", "0");
 
-    multiSwitchElem1.innerHTML = '<div class="multiSwitchElem_icons-top"></div>';
-    multiSwitchElem2.innerHTML = '<div class="multiSwitchElem_icons-centerY"></div>';
-    multiSwitchElem3.innerHTML = '<div class="multiSwitchElem_icons-bottom"></div>';
+    multiSwitchElem1.innerHTML =
+      '<div class="multiSwitchElem_icons-top"></div>';
+    multiSwitchElem2.innerHTML =
+      '<div class="multiSwitchElem_icons-centerY"></div>';
+    multiSwitchElem3.innerHTML =
+      '<div class="multiSwitchElem_icons-bottom"></div>';
 
     multiSwitch.appendChild(multiSwitchElem1);
     multiSwitch.appendChild(multiSwitchElem2);
@@ -542,20 +568,20 @@ export default class Create {
     inspectorjs_value_value.appendChild(multiSwitch);
     inspectorjs_value.appendChild(letinspectorjs_value_property);
     inspectorjs_value.appendChild(inspectorjs_value_value);
-    
-    if(value == "top") {
+
+    if (value == "top") {
       multiSwitchElem1.setAttribute("active", "true");
     }
 
-    if(value == "center") {
+    if (value == "center") {
       multiSwitchElem2.setAttribute("active", "true");
     }
 
-    if(value == "bottom") {
+    if (value == "bottom") {
       multiSwitchElem3.setAttribute("active", "true");
     }
 
-    if(!readonly) {
+    if (!readonly) {
       multiSwitchElem1.addEventListener("click", (e) => {
         multiSwitchElem1.setAttribute("active", "true");
         multiSwitchElem2.removeAttribute("active");
@@ -593,7 +619,14 @@ export default class Create {
       });
 
       multiSwitchElem1.addEventListener("keydown", (e) => {
-        if (e.keyCode == 13 || e.which == 13 || e.key == "Enter" || e.keyCode == 32 || e.which == 32 || e.key == " ") {
+        if (
+          e.keyCode == 13 ||
+          e.which == 13 ||
+          e.key == "Enter" ||
+          e.keyCode == 32 ||
+          e.which == 32 ||
+          e.key == " "
+        ) {
           multiSwitchElem1.setAttribute("active", "true");
           multiSwitchElem2.removeAttribute("active");
           multiSwitchElem3.removeAttribute("active");
@@ -607,7 +640,14 @@ export default class Create {
       });
 
       multiSwitchElem2.addEventListener("keydown", (e) => {
-        if (e.keyCode == 13 || e.which == 13 || e.key == "Enter" || e.keyCode == 32 || e.which == 32 || e.key == " ") {
+        if (
+          e.keyCode == 13 ||
+          e.which == 13 ||
+          e.key == "Enter" ||
+          e.keyCode == 32 ||
+          e.which == 32 ||
+          e.key == " "
+        ) {
           multiSwitchElem1.removeAttribute("active");
           multiSwitchElem2.setAttribute("active", "true");
           multiSwitchElem3.removeAttribute("active");
@@ -621,7 +661,14 @@ export default class Create {
       });
 
       multiSwitchElem3.addEventListener("keydown", (e) => {
-        if (e.keyCode == 13 || e.which == 13 || e.key == "Enter" || e.keyCode == 32 || e.which == 32 || e.key == " ") {
+        if (
+          e.keyCode == 13 ||
+          e.which == 13 ||
+          e.key == "Enter" ||
+          e.keyCode == 32 ||
+          e.which == 32 ||
+          e.key == " "
+        ) {
           multiSwitchElem1.removeAttribute("active");
           multiSwitchElem2.removeAttribute("active");
           multiSwitchElem3.setAttribute("active", "true");
@@ -636,6 +683,228 @@ export default class Create {
     }
 
     return inspectorjs_value;
+  }
+
+  alignText(
+    value = undefined,
+    name = "Без определения",
+    property = undefined,
+    readonly = false,
+    id = this.parent.randomString(),
+    change
+  ){
+    // <multiSwitch>
+    //   <multiSwitchElem tabindex="0">
+    //     <div class="icons-textLeft"></div>
+    //   </multiSwitchElem>
+    //   <multiSwitchElem active tabindex="0">
+    //     <div class="icons-textCenter"></div>
+    //   </multiSwitchElem>
+    //   <multiSwitchElem tabindex="0">
+    //     <div class="icons-textRight"></div>
+    //   </multiSwitchElem>
+    //   <multiSwitchElem tabindex="0">
+    //     <div class="icons-textWidth"></div>
+    //   </multiSwitchElem>
+    // </multiSwitch>;
+
+    let inspectorjs_value = document.createElement("inspectorjs_value");
+    let letinspectorjs_value_property = document.createElement("div");
+    let multiSwitch = document.createElement("multiSwitch");
+    let multiSwitchElem1 = document.createElement("multiSwitchElem");
+    let multiSwitchElem2 = document.createElement("multiSwitchElem");
+    let multiSwitchElem3 = document.createElement("multiSwitchElem");
+    let multiSwitchElem4 = document.createElement("multiSwitchElem");
+
+    let inspectorjs_value_value = document.createElement("div");
+
+    inspectorjs_value.setAttribute("id", id);
+    letinspectorjs_value_property.classList.add("inspectorjs_value_property");
+    letinspectorjs_value_property.innerHTML = name;
+
+    inspectorjs_value_value.classList.add("inspectorjs_value_value");
+    inspectorjs_value_value.setAttribute("full", "true");
+
+    multiSwitchElem1.setAttribute("tabindex", "0");
+    multiSwitchElem2.setAttribute("tabindex", "0");
+    multiSwitchElem3.setAttribute("tabindex", "0");
+    multiSwitchElem4.setAttribute("tabindex", "0");
+
+    multiSwitchElem1.innerHTML = '<div class="icons-textLeft"></div>';
+    multiSwitchElem2.innerHTML = '<div class="icons-textCenter"></div>';
+    multiSwitchElem3.innerHTML = '<div class="icons-textRight"></div>';
+    multiSwitchElem4.innerHTML = '<div class="icons-textWidth"></div>';
+
+    multiSwitch.appendChild(multiSwitchElem1);
+    multiSwitch.appendChild(multiSwitchElem2);
+    multiSwitch.appendChild(multiSwitchElem3);
+    multiSwitch.appendChild(multiSwitchElem4);
+
+    inspectorjs_value_value.appendChild(multiSwitch);
+    inspectorjs_value.appendChild(letinspectorjs_value_property);
+    inspectorjs_value.appendChild(inspectorjs_value_value);
+
+    if (value == "left") {
+      multiSwitchElem1.setAttribute("active", "true");
+    }
+
+    if (value == "center") {
+      multiSwitchElem2.setAttribute("active", "true");
+    }
+
+    if (value == "right") {
+      multiSwitchElem3.setAttribute("active", "true");
+    }
+
+    if (value == "justify") {
+      multiSwitchElem4.setAttribute("active", "true");
+    }
+
+    if (!readonly) {
+      multiSwitchElem1.addEventListener("click", (e) => {
+        multiSwitchElem1.setAttribute("active", "true");
+        multiSwitchElem2.removeAttribute("active");
+        multiSwitchElem3.removeAttribute("active");
+        multiSwitchElem4.removeAttribute("active");
+
+        if (change) {
+          this.parent.debounce(function () {
+            change("left", property, e.target, id, e);
+          }, 500)();
+        }
+      });
+
+      multiSwitchElem2.addEventListener("click", (e) => {
+        multiSwitchElem1.removeAttribute("active");
+        multiSwitchElem2.setAttribute("active", "true");
+        multiSwitchElem3.removeAttribute("active");
+        multiSwitchElem4.removeAttribute("active");
+
+        if (change) {
+          this.parent.debounce(function () {
+            change("center", property, e.target, id, e);
+          }, 500)();
+        }
+      });
+
+      multiSwitchElem3.addEventListener("click", (e) => {
+        multiSwitchElem1.removeAttribute("active");
+        multiSwitchElem2.removeAttribute("active");
+        multiSwitchElem3.setAttribute("active", "true");
+        multiSwitchElem4.removeAttribute("active");
+
+        if (change) {
+          this.parent.debounce(function () {
+            change("right", property, e.target, id, e);
+          }, 500)();
+        }
+      });
+
+      multiSwitchElem4.addEventListener("click", (e) => {
+        multiSwitchElem1.removeAttribute("active");
+        multiSwitchElem2.removeAttribute("active");
+        multiSwitchElem3.removeAttribute("active");
+        multiSwitchElem4.setAttribute("active", "true");
+
+        if (change) {
+          this.parent.debounce(function () {
+            change("justify", property, e.target, id, e);
+          }, 500)();
+        }
+      });
+
+      multiSwitchElem1.addEventListener("keydown", (e) => {
+        if (
+          e.keyCode == 13 ||
+          e.which == 13 ||
+          e.key == "Enter" ||
+          e.keyCode == 32 ||
+          e.which == 32 ||
+          e.key == " "
+        ) {
+          multiSwitchElem1.setAttribute("active", "true");
+          multiSwitchElem2.removeAttribute("active");
+          multiSwitchElem3.removeAttribute("active");
+          multiSwitchElem4.removeAttribute("active");
+
+          if (change) {
+            this.parent.debounce(function () {
+              change("left", property, e.target, id, e);
+            }, 500)();
+          }
+        }
+      });
+
+      multiSwitchElem2.addEventListener("keydown", (e) => {
+        if (
+          e.keyCode == 13 ||
+          e.which == 13 ||
+          e.key == "Enter" ||
+          e.keyCode == 32 ||
+          e.which == 32 ||
+          e.key == " "
+        ) {
+          multiSwitchElem1.removeAttribute("active");
+          multiSwitchElem2.setAttribute("active", "true");
+          multiSwitchElem3.removeAttribute("active");
+          multiSwitchElem4.removeAttribute("active");
+
+          if (change) {
+            this.parent.debounce(function () {
+              change("center", property, e.target, id, e);
+            }, 500)();
+          }
+        }
+      });
+
+      multiSwitchElem3.addEventListener("keydown", (e) => {
+        if (
+          e.keyCode == 13 ||
+          e.which == 13 ||
+          e.key == "Enter" ||
+          e.keyCode == 32 ||
+          e.which == 32 ||
+          e.key == " "
+        ) {
+          multiSwitchElem1.removeAttribute("active");
+          multiSwitchElem2.removeAttribute("active");
+          multiSwitchElem3.setAttribute("active", "true");
+          multiSwitchElem4.removeAttribute("active");
+
+          if (change) {
+            this.parent.debounce(function () {
+              change("right", property, e.target, id, e);
+            }, 500)();
+          }
+        }
+      });
+
+      multiSwitchElem4.addEventListener("keydown", (e) => {
+        if (
+          e.keyCode == 13 ||
+          e.which == 13 ||
+          e.key == "Enter" ||
+          e.keyCode == 32 ||
+          e.which == 32 ||
+          e.key == " "
+        ) {
+          multiSwitchElem1.removeAttribute("active");
+          multiSwitchElem2.removeAttribute("active");
+          multiSwitchElem3.removeAttribute("active");
+          multiSwitchElem4.setAttribute("active", "true");
+
+          if (change) {
+            this.parent.debounce(function () {
+              change("justify", property, e.target, id, e);
+            }, 500)();
+          }
+        }
+      });
+
+    }
+    
+    return inspectorjs_value;
+
   }
 
   valueMultiString(

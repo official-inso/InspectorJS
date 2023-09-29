@@ -111,7 +111,18 @@ document.addEventListener('DOMContentLoaded', function() {
           }, // Функция callback при изменении значения (default: undefined)
         },
         {
-          id: "rndString987", // ID свойства (default: randomString(32))
+          id: "rndString988", // ID свойства (default: randomString(32))
+          name: "Выравнивание текста", // Название свойства (default: "Без названия")
+          property: "param1", // Произвольное значение (default: undefined)
+          type: "alignText", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")
+          value: "left", // Значение свойства (default: "")
+          readonly: false, // Флаг только для чтения (default: false)
+          change: (value, property, elem, id, e) => {
+            console.log(value, property, elem, id, e);
+          }, // Функция callback при изменении значения (default: undefined)
+        },
+        {
+          id: "rndString989", // ID свойства (default: randomString(32))
           name: "Выравнивание по оси Х", // Название свойства (default: "Без названия")
           property: "param1", // Произвольное значение (default: undefined)
           type: "alignX", // alignX | alignY | multiString | values | button | string | integer | float | boolean | color | file | select | slider (default: "string")

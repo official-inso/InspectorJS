@@ -214,6 +214,18 @@ export default class InspectorJS {
             group.appendChild(input);
           }
 
+          else if (property.type == "alignText") {
+            let input = this.templates.create.alignText(
+              property.value,
+              property.name,
+              property.property,
+              property.readonly,
+              property.id,
+              property.change
+            );
+            group.appendChild(input);
+          }
+
           else if (property.type == "alignY") {
             let input = this.templates.create.alignY(
               property.value,
