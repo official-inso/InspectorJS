@@ -857,37 +857,37 @@ multiSwitchElem > div{
   filter: var(--invert0);
 }
 
-@media (max-width: 500px) {
-  inspectorjs_value{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-content: flex-start;
-    justify-content: flex-start;
-    align-items: stretch;
-    gap: 5px;
-    margin-bottom: 6px;
-  }
-  .inspectorjs_value_property{
-    padding-right: 0px;
-    width: 100%;
-  }
-  .inspectorjs_value_value{
-    max-width: 100%;
-    width: 100%;
-    flex-direction: row;
-    justify-content: flex-start;
-  }
-  inspectorjs_value:after,
-  .inspectorjs_value_value:before{
-    display: none;
-  }
-  .inspectorjs_value_value[group]{
-    padding-left: 0px;
-  }
-  .inspectorjs_value_value>input,
-  .inspectorjs_value_value>textarea{
-    max-width: 100% !important;
-    width: 100% !important;
-  }
+
+
+inspectorjs[size=small] inspectorjs_value{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: flex-start;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 5px;
+  margin-bottom: 6px;
+}
+inspectorjs[size=small] .inspectorjs_value_property{
+  padding-right: 0px;
+  width: 100%;
+}
+inspectorjs[size=small] .inspectorjs_value_value{
+  max-width: 100%;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+inspectorjs[size=small] inspectorjs_value:after,
+inspectorjs[size=small] .inspectorjs_value_value:before{
+  display: none;
+}
+inspectorjs[size=small] .inspectorjs_value_value[group]{
+  padding-left: 0px;
+}
+inspectorjs[size=small] .inspectorjs_value_value>input,
+inspectorjs[size=small] .inspectorjs_value_value>textarea{
+  max-width: 100% !important;
+  width: 100% !important;
 }

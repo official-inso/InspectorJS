@@ -20,6 +20,7 @@ export default class InspectorJS {
 
   #value = undefined;
   
+  #previousWidth = undefined;
 
   /**
    * Инициализация навигатора по переданному селектору или элементу
@@ -29,6 +30,34 @@ export default class InspectorJS {
   constructor(selector) {
     this.templates = new templates();
     this.#createInspector(selector);
+    this.checkResize(selector);
+  }
+
+  checkResize(inspector) {
+
+    // Сохраняем предыдущую ширину элемента
+    this.#previousWidth = inspector.offsetWidth;
+
+    // Создаем экземпляр ResizeObserver
+    const resizeObserver = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        // Получаем новую ширину элемента
+        const newWidth = entry.contentRect.width;
+
+        // Проверяем, изменилась ли ширина элемента
+        if (newWidth !== this.#previousWidth) {
+
+          this.templates.updateSize(newWidth);
+          // Выполняем необходимые действия при изменении ширины элемента
+
+          // Обновляем предыдущую ширину
+          this.#previousWidth = newWidth;
+        }
+      }
+    });
+
+    // Начинаем наблюдение за изменениями размеров элемента
+    resizeObserver.observe(inspector);
   }
 
   setValue(value){

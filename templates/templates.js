@@ -110,6 +110,18 @@ export default class templates {
     };
   }
 
+  updateSize(width){
+    
+    let container = document.getElementById(this.#container);
+
+    if(width <= 300){
+      container.setAttribute('size', 'small')
+    } else {
+      container.setAttribute('size', 'default')
+    }
+
+  }
+
   /**
    * Создает контейнер для навигатора и возвращает его в виде строки с замененными полями
    * @returns Возвращает контейнер для навигатора в виде строки с замененными полями

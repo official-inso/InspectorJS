@@ -24,6 +24,8 @@ export default class Create {
     return inspector;
   }
 
+
+
   group(id = this.parent.randomString(), show = false) {
     let group = document.createElement("inspectorjs_group");
     group.setAttribute("open", show);
